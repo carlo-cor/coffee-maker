@@ -1,0 +1,89 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "LCD_DATA[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_DATA[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_DATA[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_DATA[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_DATA[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_DATA[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_DATA[6]",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_DATA[7]",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_RS",
+					"strict" : false
+				},
+				{
+					"name" : "LCD_EN",
+					"strict" : false
+				},
+				{
+					"name" : "CLOCK_50",
+					"strict" : false
+				},
+				{
+					"name" : "KEY",
+					"strict" : false
+				},
+				{
+					"name" : "W_PRESSURE[1]",
+					"strict" : false
+				},
+				{
+					"name" : "PAPER_LEVEL[0]",
+					"strict" : false
+				},
+				{
+					"name" : "PAPER_LEVEL[1]",
+					"strict" : false
+				},
+				{
+					"name" : "W_PRESSURE[0]",
+					"strict" : false
+				},
+				{
+					"name" : "BIN_1_AMPTY",
+					"strict" : false
+				},
+				{
+					"name" : "BIN_0_AMPTY",
+					"strict" : false
+				},
+				{
+					"name" : "CH_AMPTY",
+					"strict" : false
+				},
+				{
+					"name" : "ND_AMPTY",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

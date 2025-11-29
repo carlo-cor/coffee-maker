@@ -1,0 +1,47 @@
+
+State Machine - |lcdIp_Top|state
+Name state.S_WAIT_ENTRY_SW state.S_CLR_SW state.S_IDLE state.S_WAIT_WL2 state.S_WRITE_L2 state.S_WAIT_L2 state.S_SET_L2 state.S_WAIT_WL1 state.S_WRITE_L1 state.S_WAIT_L1 state.S_SET_L1 state.S_WAITON state.S_WAIT_DISPON state.S_WAIT_ENTRY state.S_WAIT_CLR state.S_WAIT_DISPOFF state.S_WAIT3 state.S_WAIT2 state.S_WAIT1 state.S_PWRUP 
+state.S_PWRUP 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.S_WAIT1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.S_WAIT2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.S_WAIT3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.S_WAIT_DISPOFF 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.S_WAIT_CLR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.S_WAIT_ENTRY 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.S_WAIT_DISPON 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.S_WAITON 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.S_SET_L1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.S_WAIT_L1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.S_WRITE_L1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.S_WAIT_WL1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.S_SET_L2 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.S_WAIT_L2 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.S_WRITE_L2 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.S_WAIT_WL2 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.S_IDLE 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.S_CLR_SW 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.S_WAIT_ENTRY_SW 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |lcdIp_Top|prev_error_sel
+Name prev_error_sel.1010 prev_error_sel.1001 prev_error_sel.1000 prev_error_sel.0111 prev_error_sel.0110 prev_error_sel.0101 prev_error_sel.0100 prev_error_sel.0011 prev_error_sel.0010 prev_error_sel.0001 prev_error_sel.0000 
+prev_error_sel.0000 0 0 0 0 0 0 0 0 0 0 0 
+prev_error_sel.0001 0 0 0 0 0 0 0 0 0 1 1 
+prev_error_sel.0010 0 0 0 0 0 0 0 0 1 0 1 
+prev_error_sel.0011 0 0 0 0 0 0 0 1 0 0 1 
+prev_error_sel.0100 0 0 0 0 0 0 1 0 0 0 1 
+prev_error_sel.0101 0 0 0 0 0 1 0 0 0 0 1 
+prev_error_sel.0110 0 0 0 0 1 0 0 0 0 0 1 
+prev_error_sel.0111 0 0 0 1 0 0 0 0 0 0 1 
+prev_error_sel.1000 0 0 1 0 0 0 0 0 0 0 1 
+prev_error_sel.1001 0 1 0 0 0 0 0 0 0 0 1 
+prev_error_sel.1010 1 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |lcdIp_Top|lcdIp:u_lcd|st
+Name st.WAIT_DONE st.E_LOW st.E_HIGH st.SETUP st.LOAD st.IDLE st.INIT_WAIT 
+st.INIT_WAIT 0 0 0 0 0 0 0 
+st.IDLE 0 0 0 0 0 1 1 
+st.LOAD 0 0 0 0 1 0 1 
+st.SETUP 0 0 0 1 0 0 1 
+st.E_HIGH 0 0 1 0 0 0 1 
+st.E_LOW 0 1 0 0 0 0 1 
+st.WAIT_DONE 1 0 0 0 0 0 1 

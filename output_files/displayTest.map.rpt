@@ -1,0 +1,428 @@
+Analysis & Synthesis report for displayTest
+Sun Oct 12 19:43:01 2025
+Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |lcdTop|lcdIp:lcd0|phase
+  9. State Machine - |lcdTop|lcdIp:lcd0|sub
+ 10. Registers Removed During Synthesis
+ 11. Removed Registers Triggering Further Register Optimizations
+ 12. General Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Post-Synthesis Netlist Statistics for Top Partition
+ 15. Elapsed Time Per Partition
+ 16. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Oct 12 19:43:01 2025           ;
+; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Standard Edition ;
+; Revision Name                      ; displayTest                                     ;
+; Top-level Entity Name              ; lcdTop                                          ;
+; Family                             ; Cyclone IV E                                    ;
+; Total logic elements               ; 216                                             ;
+;     Total combinational functions  ; 209                                             ;
+;     Dedicated logic registers      ; 97                                              ;
+; Total registers                    ; 97                                              ;
+; Total pins                         ; 14                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                            ; lcdTop             ; displayTest        ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 20          ;
+; Maximum allowed            ; 10          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 10          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-10        ;   0.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                   ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                     ; Library ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------+---------+
+; lcdIp.v                          ; yes             ; User Verilog HDL File  ; C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v  ;         ;
+; lcdTop.v                         ; yes             ; User Verilog HDL File  ; C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v ;         ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 216       ;
+;                                             ;           ;
+; Total combinational functions               ; 209       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 106       ;
+;     -- 3 input functions                    ; 35        ;
+;     -- <=2 input functions                  ; 68        ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 155       ;
+;     -- arithmetic mode                      ; 54        ;
+;                                             ;           ;
+; Total registers                             ; 97        ;
+;     -- Dedicated logic registers            ; 97        ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 14        ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 97        ;
+; Total fan-out                               ; 1102      ;
+; Average fan-out                             ; 3.30      ;
++---------------------------------------------+-----------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                      ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; |lcdTop                    ; 209 (46)            ; 97 (37)                   ; 0           ; 0            ; 0       ; 0         ; 14   ; 0            ; |lcdTop             ; lcdTop      ; work         ;
+;    |lcdIp:lcd0|            ; 163 (163)           ; 60 (60)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdTop|lcdIp:lcd0  ; lcdIp       ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------+
+; State Machine - |lcdTop|lcdIp:lcd0|phase      ;
++-----------+-----------+-----------+-----------+
+; Name      ; phase.000 ; phase.010 ; phase.001 ;
++-----------+-----------+-----------+-----------+
+; phase.000 ; 0         ; 0         ; 0         ;
+; phase.001 ; 1         ; 0         ; 1         ;
+; phase.010 ; 1         ; 1         ; 0         ;
++-----------+-----------+-----------+-----------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------+
+; State Machine - |lcdTop|lcdIp:lcd0|sub     ;
++--------+--------+--------+--------+--------+
+; Name   ; sub.11 ; sub.10 ; sub.01 ; sub.00 ;
++--------+--------+--------+--------+--------+
+; sub.00 ; 0      ; 0      ; 0      ; 0      ;
+; sub.01 ; 0      ; 0      ; 1      ; 1      ;
+; sub.10 ; 0      ; 1      ; 0      ; 1      ;
+; sub.11 ; 1      ; 0      ; 0      ; 1      ;
++--------+--------+--------+--------+--------+
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; lcdIp:lcd0|lcd_data[0..2]              ; Merged with lcdIp:lcd0|lcd_data[3]     ;
+; lcdIp:lcd0|lcd_data[3]                 ; Stuck at GND due to stuck port data_in ;
+; inputChar[7]                           ; Stuck at GND due to stuck port data_in ;
+; lcdIp:lcd0|byte_reg[7]                 ; Stuck at GND due to stuck port data_in ;
+; lcdIp:lcd0|lcd_rw                      ; Stuck at GND due to stuck port data_in ;
+; lcdIp:lcd0|widx[2]                     ; Stuck at GND due to stuck port data_in ;
+; lcdIp:lcd0|phase~9                     ; Lost fanout                            ;
+; lcdIp:lcd0|sub~6                       ; Lost fanout                            ;
+; lcdIp:lcd0|sub~7                       ; Lost fanout                            ;
+; lcdIp:lcd0|init_cmd~0                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~1                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~2                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~3                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~4                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~5                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~6                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~7                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~8                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~9                  ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~10                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~11                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~12                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~13                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~14                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~15                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~16                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~17                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~18                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~19                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~20                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~21                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~22                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~23                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~24                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~25                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~26                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~27                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~28                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~29                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~30                 ; Stuck at GND due to stuck port clock   ;
+; lcdIp:lcd0|init_cmd~31                 ; Stuck at GND due to stuck port clock   ;
+; Total Number of Removed Registers = 43 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                        ;
++---------------+---------------------------+----------------------------------------+
+; Register name ; Reason for Removal        ; Registers Removed due to This Register ;
++---------------+---------------------------+----------------------------------------+
+; inputChar[7]  ; Stuck at GND              ; lcdIp:lcd0|byte_reg[7]                 ;
+;               ; due to stuck port data_in ;                                        ;
++---------------+---------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 97    ;
+; Number of registers using Synchronous Clear  ; 58    ;
+; Number of registers using Synchronous Load   ; 2     ;
+; Number of registers using Asynchronous Clear ; 90    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 76    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |lcdTop|lcdIp:lcd0|widx[0]     ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; Yes        ; |lcdTop|lcdIp:lcd0|lcd_rs      ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; Yes        ; |lcdTop|lcdIp:lcd0|lcd_data[5] ;
+; 15:1               ; 32 bits   ; 320 LEs       ; 32 LEs               ; 288 LEs                ; Yes        ; |lcdTop|lcdIp:lcd0|t[8]        ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 12 LEs               ; 10 LEs                 ; No         ; |lcdTop|lcdIp:lcd0|sub         ;
+; 19:1               ; 2 bits    ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; No         ; |lcdTop|lcdIp:lcd0|sub         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 14                          ;
+; cycloneiii_ff         ; 97                          ;
+;     CLR               ; 20                          ;
+;     CLR SLD           ; 1                           ;
+;     ENA               ; 7                           ;
+;     ENA CLR           ; 10                          ;
+;     ENA CLR SCLR      ; 58                          ;
+;     ENA CLR SLD       ; 1                           ;
+; cycloneiii_lcell_comb ; 211                         ;
+;     arith             ; 54                          ;
+;         2 data inputs ; 54                          ;
+;     normal            ; 157                         ;
+;         0 data inputs ; 2                           ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 10                          ;
+;         3 data inputs ; 35                          ;
+;         4 data inputs ; 106                         ;
+;                       ;                             ;
+; Max LUT depth         ; 9.00                        ;
+; Average LUT depth     ; 4.84                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+    Info: Processing started: Sun Oct 12 19:42:52 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off displayTest -c displayTest
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 10 of the 10 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file lcdip.v
+    Info (12023): Found entity 1: lcdIp File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file lcdtop.v
+    Info (12023): Found entity 1: lcdTop File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 1
+Info (12127): Elaborating entity "lcdTop" for the top level hierarchy
+Warning (10230): Verilog HDL assignment warning at lcdTop.v(71): truncated value with size 32 to match size of target (24) File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 71
+Warning (10230): Verilog HDL assignment warning at lcdTop.v(78): truncated value with size 32 to match size of target (4) File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 78
+Warning (10030): Net "message.data_a" at lcdTop.v(44) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 44
+Warning (10030): Net "message.waddr_a" at lcdTop.v(44) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 44
+Warning (10030): Net "message.we_a" at lcdTop.v(44) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 44
+Info (12128): Elaborating entity "lcdIp" for hierarchy "lcdIp:lcd0" File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 37
+Info (10264): Verilog HDL Case Statement information at lcdIp.v(198): all case item expressions in this case statement are onehot File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 198
+Warning (10030): Net "wake_seq.data_a" at lcdIp.v(25) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 25
+Warning (10030): Net "wake_seq.waddr_a" at lcdIp.v(25) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 25
+Warning (10030): Net "init_cmd.data_a" at lcdIp.v(34) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 34
+Warning (10030): Net "init_cmd.waddr_a" at lcdIp.v(34) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 34
+Warning (10030): Net "wake_seq.we_a" at lcdIp.v(25) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 25
+Warning (10030): Net "init_cmd.we_a" at lcdIp.v(34) has no driver or initial value, using a default initial value '0' File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 34
+Info (276014): Found 3 instances of uninferred RAM logic
+    Info (276004): RAM logic "lcdIp:lcd0|init_cmd" is uninferred due to inappropriate RAM size File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 34
+    Info (276004): RAM logic "lcdIp:lcd0|wake_seq" is uninferred due to inappropriate RAM size File: C:/Users/anicolazzo/Desktop/displayTest/lcdIp.v Line: 25
+    Info (276004): RAM logic "message" is uninferred due to inappropriate RAM size File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 44
+Critical Warning (127005): Memory depth (16) in the design file differs from memory depth (11) in the Memory Initialization File "C:/Users/anicolazzo/Desktop/displayTest/db/displayTest.ram0_lcdTop_d9638f16.hdl.mif" -- setting initial value for remaining addresses to 0
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "lcd_data[0]" is stuck at GND File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 4
+    Warning (13410): Pin "lcd_data[1]" is stuck at GND File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 4
+    Warning (13410): Pin "lcd_data[2]" is stuck at GND File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 4
+    Warning (13410): Pin "lcd_data[3]" is stuck at GND File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 4
+    Warning (13410): Pin "lcd_rw" is stuck at GND File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 6
+    Warning (13410): Pin "lcd_on" is stuck at VCC File: C:/Users/anicolazzo/Desktop/displayTest/lcdTop.v Line: 9
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 3 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 232 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 12 output pins
+    Info (21061): Implemented 218 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 20 warnings
+    Info: Peak virtual memory: 4824 megabytes
+    Info: Processing ended: Sun Oct 12 19:43:01 2025
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:23
+
+

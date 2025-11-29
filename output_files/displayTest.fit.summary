@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sun Oct 12 19:43:18 2025
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+Revision Name : displayTest
+Top-level Entity Name : lcdTop
+Family : Cyclone IV E
+Device : EP4CE115F29C7
+Timing Models : Final
+Total logic elements : 213 / 114,480 ( < 1 % )
+    Total combinational functions : 209 / 114,480 ( < 1 % )
+    Dedicated logic registers : 97 / 114,480 ( < 1 % )
+Total registers : 97
+Total pins : 14 / 529 ( 3 % )
+Total virtual pins : 0
+Total memory bits : 0 / 3,981,312 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 532 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

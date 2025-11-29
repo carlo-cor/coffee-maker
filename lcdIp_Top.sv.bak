@@ -1,0 +1,139 @@
+module lcdIp_Top (
+    input  wire CLOCK_50,
+    input  wire KEY0,             // Active-low reset
+    output wire [7:0] LCD_DATA,
+    output wire LCD_RS,
+    output wire LCD_RW,
+    output wire LCD_EN
+);
+    using namespace std;
+    //========================================================
+    // Signal Declarations
+    //========================================================
+    reg [2:0] userCommand0;
+    reg       send;
+    reg [7:0] inputCommand;
+    wire      busy, systemReady;
+
+    reg [4:0] index;
+    reg [23:0] delay;
+    reg [7:0] message [0:10];   // "HELLO WORLD" = 11 chars
+    reg       reset_sync;
+
+    //========================================================
+    // Instantiate LCD Driver
+    //========================================================
+    lcdIp lcd_driver (
+        .clk          (CLOCK_50),
+        .userCommand0 (userCommand0),
+        .send         (send),
+        .reset        (reset_sync),
+        .inputCommand (inputCommand),
+        .lcd_data     (LCD_DATA),
+        .lcd_rs       (LCD_RS),
+        .lcd_rw       (LCD_RW),
+        .lcd_e        (LCD_EN),
+        .busy         (busy),
+        .systemReady  (systemReady)
+    );
+
+    //========================================================
+    // Reset Synchronization
+    //========================================================
+    always @(posedge CLOCK_50) begin
+        reset_sync <= ~KEY0;
+    end
+
+    //========================================================
+    // Initialize message ROM
+    //========================================================
+    initial begin
+        message[0]  = "H";
+        message[1]  = "E";
+        message[2]  = "L";
+        message[3]  = "L";
+        message[4]  = "O";
+        message[5]  = " ";
+        message[6]  = "W";
+        message[7]  = "O";
+        message[8]  = "R";
+        message[9]  = "L";
+        message[10] = "D";
+    end
+
+    //========================================================
+    // Control FSM to display message
+    //========================================================
+    localparam S_IDLE   = 0,
+               S_CLEAR  = 1,
+               S_SET    = 2,
+               S_WRITE  = 3,
+               S_NEXT   = 4,
+               S_DONE   = 5;
+
+    reg [2:0] state = S_IDLE;
+
+    always @(posedge CLOCK_50) begin
+        if (reset_sync) begin
+            userCommand0 <= 3'b000;
+            send         <= 0;
+            inputCommand <= 8'h00;
+            index        <= 0;
+            delay        <= 0;
+            state        <= S_IDLE;
+        end
+        else begin
+            case (state)
+                S_IDLE: begin
+                    if (!busy) begin
+                        userCommand0 <= 3'b001; // CMD_CLEAR
+                        send         <= 1;
+                        state        <= S_CLEAR;
+                    end
+                end
+
+                S_CLEAR: begin
+                    send <= 0;
+                    if (!busy) begin
+                        userCommand0 <= 3'b000; // CMD_SET_CURSOR
+                        send         <= 1;
+                        state        <= S_SET;
+                    end
+                end
+
+                S_SET: begin
+                    send <= 0;
+                    if (!busy) begin
+                        inputCommand <= message[index];
+                        userCommand0 <= 3'b010; // CMD_WRITECHAR
+                        send         <= 1;
+                        state        <= S_WRITE;
+                    end
+                end
+
+                S_WRITE: begin
+                    send <= 0;
+                    if (!busy) begin
+                        state <= S_NEXT;
+                    end
+                end
+
+                S_NEXT: begin
+                    if (index < 10) begin
+                        index <= index + 1;
+                        state <= S_SET;
+                    end else begin
+                        state <= S_DONE;
+                    end
+                end
+
+                S_DONE: begin
+                    // Finished writing message
+                end
+
+                default: state <= S_IDLE;
+            endcase
+        end
+    end
+
+endmodule

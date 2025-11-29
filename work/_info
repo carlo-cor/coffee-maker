@@ -1,0 +1,60 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.0
+vlcdIp
+Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z1 !s110 1761255893
+!i10b 1
+!s100 :aAT9F<MW[0:3]hd00A;00
+IlUAzLmSKTc^FdVQi5V8gO3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 lcdIp_sv_unit
+S1
+Z3 dC:/Users/anicolazzo/Desktop/displayTest
+w1761255657
+8C:/Users/anicolazzo/Desktop/displayTest/lcdIp.sv
+FC:/Users/anicolazzo/Desktop/displayTest/lcdIp.sv
+L0 1
+Z4 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z5 !s108 1761255893.000000
+!s107 C:/Users/anicolazzo/Desktop/displayTest/lcdIp.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/anicolazzo/Desktop/displayTest/lcdIp.sv|
+!i113 1
+Z6 o-work work -sv
+Z7 tCvgOpt 0
+nlcd@ip
+vlcdIp_tb
+R0
+R1
+!i10b 1
+!s100 Mni3BTEFbLgJ>b:5NbWCa3
+IDJ=<][KA>mRIl1ce6zkAI0
+R2
+!s105 lcdIP_tb_sv_unit
+S1
+R3
+w1760492823
+8C:/Users/anicolazzo/Desktop/displayTest/lcdIP_tb.sv
+FC:/Users/anicolazzo/Desktop/displayTest/lcdIP_tb.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/anicolazzo/Desktop/displayTest/lcdIP_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/anicolazzo/Desktop/displayTest/lcdIP_tb.sv|
+!i113 1
+R6
+R7
+nlcd@ip_tb

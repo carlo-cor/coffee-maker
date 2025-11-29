@@ -1,0 +1,15 @@
+C:/Users/carlo/Downloads/coffeeMaker/coffeeMaker/displayTest/lcdIp.sv {1 {vlog -work work -sv -stats=none C:/Users/carlo/Downloads/coffeeMaker/coffeeMaker/displayTest/lcdIp.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module lcdIp
+
+Top level modules:
+	lcdIp
+
+} {} {}} C:/Users/carlo/Downloads/coffeeMaker/coffeeMaker/displayTest/lcdIP_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/carlo/Downloads/coffeeMaker/coffeeMaker/displayTest/lcdIP_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module lcdIp_tb
+
+Top level modules:
+	lcdIp_tb
+
+} {} {}}

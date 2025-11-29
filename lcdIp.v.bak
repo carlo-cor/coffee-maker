@@ -1,0 +1,98 @@
+module lcdIp (
+    input wire clk,
+    input wire rst,
+    input wire [7:0] inputString,   // ASCII byte to write
+    input wire send,                // pulse high to send
+    output reg [7:0] lcd_data,      // connect to LCD D7–D0 (use only high nibble)
+    output reg lcd_rs,
+    output reg lcd_rw,
+    output reg lcd_e,
+    output reg systemReady
+);
+    // ----------------------------
+    // Internal registers
+    // ----------------------------
+    reg [23:0] timer;
+    reg [2:0] initIdx;
+    reg [7:0] cmd;
+    reg [7:0] command [0:5];
+    reg [7:0] byte_reg;
+    reg sending;
+
+    // ----------------------------
+    // Initialization sequence
+    // ----------------------------
+    // NOTE: assign is illegal for reg arrays -> use procedural assignment instead
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            command[0] <= 8'h33; // Force 8-bit mode 3x
+            command[1] <= 8'h32; // Switch to 4-bit
+            command[2] <= 8'h28; // 4-bit, 2-line, 5x8 font
+            command[3] <= 8'h0C; // Display ON, cursor OFF
+            command[4] <= 8'h06; // Entry mode: increment, no shift
+            command[5] <= 8'h01; // Clear display
+
+            lcd_rs <= 0;
+            lcd_rw <= 0;
+            lcd_e  <= 0;
+            lcd_data <= 8'h00;
+            initIdx <= 0;
+            timer <= 0;
+            systemReady <= 0;
+            sending <= 0;
+        end
+        else begin
+            // ======================================
+            // INIT PHASE (run once after reset)
+            // ======================================
+            if (!systemReady) begin
+                timer <= timer + 1;
+
+                // Send each init command with a small delay
+                if (timer == 0) begin
+                    cmd <= command[initIdx];
+                    lcd_rs <= 0;
+                    lcd_rw <= 0;
+                    lcd_data <= cmd;
+                    lcd_e <= 1;
+                end
+                else if (timer == 500) begin
+                    lcd_e <= 0; // end pulse
+                end
+                else if (timer == 2000) begin
+                    timer <= 0;
+                    initIdx <= initIdx + 1;
+                    if (initIdx == 5) begin
+                        systemReady <= 1;
+                        timer <= 0;
+                    end
+                end
+            end
+
+            // ======================================
+            // DATA MODE (after init)
+            // ======================================
+            else begin
+                if (send && !sending) begin
+                    sending <= 1;
+                    byte_reg <= inputString;
+                    lcd_rs <= 1;  // data mode
+                    lcd_rw <= 0;
+                    lcd_data <= inputString;
+                    lcd_e <= 1;
+                    timer <= 0;
+                end
+                else if (sending) begin
+                    timer <= timer + 1;
+                    if (timer == 500)
+                        lcd_e <= 0;
+                    else if (timer == 1500) begin
+                        sending <= 0;
+                        lcd_e <= 0;
+                    end
+                end
+            end
+        end
+    end
+
+endmodule

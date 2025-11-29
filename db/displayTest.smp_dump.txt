@@ -1,0 +1,13 @@
+
+State Machine - |lcdTop|lcdIp:lcd0|phase
+Name phase.000 phase.010 phase.001 
+phase.000 0 0 0 
+phase.001 1 0 1 
+phase.010 1 1 0 
+
+State Machine - |lcdTop|lcdIp:lcd0|sub
+Name sub.11 sub.10 sub.01 sub.00 
+sub.00 0 0 0 0 
+sub.01 0 0 1 1 
+sub.10 0 1 0 1 
+sub.11 1 0 0 1 

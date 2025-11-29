@@ -1,0 +1,148 @@
+module lcdIp (
+    input  wire clk,
+    input  wire [2:0] userCommand0,
+    input  wire send,
+    input  wire reset,
+    input  wire [7:0] inputCommand,
+    output reg  [7:0] lcd_data,   // only upper nibble used physically
+    output reg  lcd_rs,           // Register Select
+    output reg  lcd_rw,           // Read or Write Mode
+    output reg  lcd_e,            // start flag
+    output reg  busy,
+    output reg  systemReady
+);
+
+    typedef enum logic [2:0] {
+        IDLE        = 3'b000,
+        SET_CURSOR  = 3'b001,
+        WRITE_CHAR  = 3'b010,
+        PULSE_E     = 3'b011,
+        WAITBUSY    = 3'b100,
+        CLEAR       = 3'b101
+    } state_t;
+
+    typedef enum logic [1:0] {
+        CMD_SET_CURSOR = 2'b00,
+        CMD_CLEAR      = 2'b01,
+        CMD_WRITECHAR  = 2'b10
+    } commandUser;
+
+    state_t current_state, next_state;
+    commandUser userCommand;
+    reg [23:0] timer;
+
+
+    function automatic void setCursor(
+        input  logic [7:0] pos,
+        output logic       lcd_rs,
+        output logic       lcd_rw,
+        output logic [7:0] lcd_data,
+        output logic       lcd_e
+    );
+    begin
+        lcd_rs   = 0;
+        lcd_rw   = 0;
+        lcd_data = pos;
+        lcd_e    = 1;
+    end
+    endfunction
+
+    function automatic void displayChar(
+        input  logic [7:0] chr,
+        output logic       lcd_rs,
+        output logic       lcd_rw,
+        output logic [7:0] lcd_data,
+        output logic       lcd_e
+    );
+    begin
+        lcd_rs   = 1;
+        lcd_rw   = 0;
+        lcd_data = chr;
+        lcd_e    = 1;
+    end
+    endfunction
+
+    function automatic void clearDisplay(
+        output logic       lcd_rs,
+        output logic       lcd_rw,
+        output logic [7:0] lcd_data,
+        output logic       lcd_e
+    );
+    begin
+        lcd_rs   = 0;
+        lcd_rw   = 0;
+        lcd_data = 8'h01;
+        lcd_e    = 1;
+    end
+    endfunction
+
+    always @(*) begin
+        lcd_rs = 0;
+        lcd_rw = 0;
+        lcd_e = 0;
+        busy = 0;
+        systemReady = 0;
+        userCommand = commandUser'(userCommand0);
+
+        case (current_state)
+            IDLE: begin
+                case (userCommand)
+                    CMD_SET_CURSOR: next_state = SET_CURSOR;
+                    CMD_CLEAR:      next_state = CLEAR;
+                    CMD_WRITECHAR:  next_state = WRITE_CHAR;
+                    default:        next_state = IDLE;
+                endcase
+            end
+
+            SET_CURSOR: begin
+                setCursor(8'h80, lcd_rs, lcd_rw, lcd_data, lcd_e);
+                timer = 24'd50000;
+                next_state = PULSE_E;
+            end
+
+            WRITE_CHAR: begin
+                displayChar(inputCommand, lcd_rs, lcd_rw, lcd_data, lcd_e);
+                timer = 24'd50000;
+                next_state = PULSE_E;
+            end
+
+            PULSE_E: begin
+                busy = 1;
+                if (timer == 0) begin
+                    busy = 0;
+                    next_state = WAITBUSY;
+                end
+                else next_state = PULSE_E;
+                timer = 24'hFFFFF; // your code had this — left as is
+            end
+
+            CLEAR: begin
+                clearDisplay(lcd_rs, lcd_rw, lcd_data, lcd_e);
+                timer = 24'd50000;
+                next_state = PULSE_E;
+            end
+
+            WAITBUSY: begin
+                busy = 1;
+                if (timer == 0) begin
+                    busy = 0;
+                    next_state = IDLE;
+                end else next_state = WAITBUSY;
+            end
+
+            default: next_state = IDLE;
+        endcase
+    end
+
+    always @(posedge clk or posedge reset) begin
+        if (reset)
+            current_state <= IDLE;
+        else begin
+            if (!busy)
+                current_state <= next_state;
+            else if (timer != 0)
+                timer <= timer - 1;
+        end
+    end
+
+endmodule

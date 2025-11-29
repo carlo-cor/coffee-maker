@@ -1,0 +1,82 @@
+module lcd_top (
+    input  wire clk,
+    input  wire rst,
+    output wire [7:0] lcd_data,
+    output wire lcd_rs,
+    output wire lcd_rw,
+    output wire lcd_e
+);
+
+    // ----------------------------
+    // Internal signals
+    // ----------------------------
+    reg [7:0] inputChar;
+    reg send;
+    wire systemReady;
+
+    // Instantiate your lcdIp driver
+    lcdIp lcd0 (
+        .clk(clk),
+        .rst(rst),
+        .inputString(inputChar),
+        .send(send),
+        .lcd_data(lcd_data),
+        .lcd_rs(lcd_rs),
+        .lcd_rw(lcd_rw),
+        .lcd_e(lcd_e),
+        .systemReady(systemReady)
+    );
+
+    // ----------------------------
+    // Simple HELLO WORLD sequencer
+    // ----------------------------
+    reg [23:0] delayCounter;
+    reg [3:0]  index;
+    reg [7:0]  message [0:10];
+    reg        sent;
+
+    // Store message bytes (synthesizable)
+    always @(posedge clk) begin
+        message[0]  <= "H";
+        message[1]  <= "E";
+        message[2]  <= "L";
+        message[3]  <= "L";
+        message[4]  <= "O";
+        message[5]  <= " ";
+        message[6]  <= "W";
+        message[7]  <= "O";
+        message[8]  <= "R";
+        message[9]  <= "L";
+        message[10] <= "D";
+    end
+
+    // ----------------------------
+    // Send logic
+    // ----------------------------
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            delayCounter <= 0;
+            index        <= 0;
+            send         <= 0;
+            inputChar    <= 8'h00;
+            sent         <= 0;
+        end else begin
+            // wait for lcdIp to finish init
+            if (systemReady && !sent) begin
+                delayCounter <= delayCounter + 1;
+
+                // wait a little between characters (~10 ms)
+                if (delayCounter == 10_0000) begin
+                    inputChar <= message[index];
+                    send <= 1;                     // trigger lcdIp
+                    delayCounter <= 0;
+                    index <= index + 1;
+                    if (index == 11) sent <= 1;    // done sending
+                end else
+                    send <= 0;
+            end else
+                send <= 0;
+        end
+    end
+
+endmodule

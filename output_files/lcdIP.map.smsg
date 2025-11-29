@@ -1,0 +1,1 @@
+Info (10281): Verilog HDL Declaration information at lcdIp_Top.sv(4): object "RST" differs only in case from object "rst" in the same scope File: C:/Users/ccortez/Downloads/coffeeMaker (sync)/displayTest/lcdIp_Top.sv Line: 4

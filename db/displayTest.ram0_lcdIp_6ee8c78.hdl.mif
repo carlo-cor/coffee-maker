@@ -1,0 +1,15 @@
+-- begin_signature
+-- lcdIp
+-- end_signature
+WIDTH=4;
+DEPTH=4;
+
+ADDRESS_RADIX=UNS;
+DATA_RADIX=BIN;
+
+CONTENT BEGIN
+	3 :	0010;
+	2 :	0011;
+	1 :	0011;
+	0 :	0011;
+END;

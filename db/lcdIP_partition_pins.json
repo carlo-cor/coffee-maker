@@ -76,6 +76,26 @@
 					"strict" : false
 				},
 				{
+					"name" : "W_TEMP",
+					"strict" : false
+				},
+				{
+					"name" : "W_PRESSURE[1]",
+					"strict" : false
+				},
+				{
+					"name" : "STATUS",
+					"strict" : false
+				},
+				{
+					"name" : "PAPER_LEVEL[1]",
+					"strict" : false
+				},
+				{
+					"name" : "CH_AMPTY",
+					"strict" : false
+				},
+				{
 					"name" : "BIN_1_AMPTY",
 					"strict" : false
 				},
@@ -84,31 +104,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "W_PRESSURE[1]",
-					"strict" : false
-				},
-				{
 					"name" : "ND_AMPTY",
 					"strict" : false
 				},
 				{
-					"name" : "CH_AMPTY",
-					"strict" : false
-				},
-				{
-					"name" : "PAPER_LEVEL[1]",
-					"strict" : false
-				},
-				{
-					"name" : "STATUS",
-					"strict" : false
-				},
-				{
-					"name" : "W_TEMP",
-					"strict" : false
-				},
-				{
-					"name" : "BTN_FLAVOR",
+					"name" : "KEY",
 					"strict" : false
 				},
 				{
@@ -124,11 +124,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "BTN_START",
-					"strict" : false
-				},
-				{
-					"name" : "KEY",
+					"name" : "BTN_FLAVOR",
 					"strict" : false
 				},
 				{

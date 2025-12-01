@@ -465,12 +465,7 @@ module lcdIp_Top (
                 2'd1: mk_line2 = {"H","E","A","T","I","N","G",".",".","."," "," "," "," "," "," "};
                 2'd2: begin
                     if (prog16 >= 5'd16) filled12 = 4'd12;
-                    else begin
-    logic [7:0] tmp_fill;
-    tmp_fill = (prog16 * 8'd12) / 8'd16;
-    filled12 = tmp_fill[3:0];
-end
-
+                    else filled12 = ((prog16 * 5'd12) / 5'd16)[3:0];
                     mk_line2 = { bar12(filled12), phase4(ph) };
                 end
                 default: mk_line2 = {"R","E","A","D","Y"," "," "," "," "," "," "," "," "," "," "," "};

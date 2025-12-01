@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Sun Nov 30 22:41:06 2025
+Analysis & Synthesis Status : Successful - Sun Nov 30 23:14:00 2025
 Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Standard Edition
 Revision Name : lcdIP
 Top-level Entity Name : lcdIp_Top
 Family : Cyclone IV E
-Total logic elements : 1,606
-    Total combinational functions : 1,579
-    Dedicated logic registers : 270
-Total registers : 270
+Total logic elements : 1,696
+    Total combinational functions : 1,666
+    Dedicated logic registers : 335
+Total registers : 335
 Total pins : 37
 Total virtual pins : 0
 Total memory bits : 0

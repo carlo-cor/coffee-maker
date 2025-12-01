@@ -1,21 +1,18 @@
-//======================== coffeeSystem.sv ========================
 `timescale 1ns/1ps
 `include "cmach_recipes.svh"
 
 module coffeeSystem #(
     parameter int CLK_HZ      = 50_000_000,
-    parameter int SPEEDUP_DIV  = 1          // set >1 to speed simulation
+    parameter int SPEEDUP_DIV  = 1
 ) (
     input  logic        clk,
     input  logic        rst,
 
-    // UI pushbuttons (level signals; module edge-detects them)
     input  logic        btn_flavor,
     input  logic        btn_type,
     input  logic        btn_size,
     input  logic        btn_start,
 
-    // Sensors
     input  logic [1:0]  PAPER_LEVEL,
     input  logic        BIN_0_AMPTY,
     input  logic        BIN_1_AMPTY,
@@ -25,18 +22,14 @@ module coffeeSystem #(
     input  logic        W_TEMP,
     input  logic        STATUS,
 
-    // Recipe table (15 entries) (packed bits, matches your cmach_recp output)
     input  logic [$bits(coffee_recipe_t)-1:0] recipes [0:14],
 
-    // Current selections (for LCD display)
-    output logic        cur_flavor,     // 0=Coffee1, 1=Coffee2
-    output logic [2:0]  cur_type,       // 0..4
-    output logic [1:0]  cur_size,       // 0..2
+    output logic        cur_flavor,
+    output logic [2:0]  cur_type,
+    output logic [1:0]  cur_size,
 
-    // State visibility (for LCD display)
-    output logic [1:0]  sys_state,      // 0=SELECT, 1=WAITING(HEAT), 2=BREWING
+    output logic [1:0]  sys_state,
 
-    // Motor/control outputs
     output logic        HEAT_EN,
     output logic        POUROVER_EN,
     output logic        WATER_EN,
@@ -44,16 +37,13 @@ module coffeeSystem #(
     output logic        GRINDER_1_EN,
     output logic        PAPER_EN,
 
-    // Optional extras
     output logic        COCOA_EN,
     output logic        CREAMER_EN,
 
-    // NEW: selection/system error bitmask (for LCD cycling + start-blocking)
     output logic [15:0] err_mask,
 
-    // NEW: brewing phase + progress (for LCD progress bar)
     output logic [2:0]  brew_phase,
-    output logic [4:0]  brew_progress16   // 0..16
+    output logic [4:0]  brew_progress16
 );
 
     //============================================================
@@ -71,25 +61,34 @@ module coffeeSystem #(
 
     //============================================================
     // Edge detect buttons (one action per press)
+    // FIX: prevent spurious "press" right after reset
     //============================================================
     logic bf_d, bt_d, bs_d, bstart_d;
     logic bf_p, bt_p, bs_p, bstart_p;
+    logic btns_armed;
 
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            bf_d     <= 1'b0; bt_d     <= 1'b0; bs_d     <= 1'b0; bstart_d <= 1'b0;
+            bf_d       <= 1'b0;
+            bt_d       <= 1'b0;
+            bs_d       <= 1'b0;
+            bstart_d   <= 1'b0;
+            btns_armed <= 1'b0;
         end else begin
             bf_d     <= btn_flavor;
             bt_d     <= btn_type;
             bs_d     <= btn_size;
             bstart_d <= btn_start;
+
+            // after we have sampled the inputs at least once, allow edge pulses
+            btns_armed <= 1'b1;
         end
     end
 
-    assign bf_p     = btn_flavor & ~bf_d;
-    assign bt_p     = btn_type   & ~bt_d;
-    assign bs_p     = btn_size   & ~bs_d;
-    assign bstart_p = btn_start  & ~bstart_d;
+    assign bf_p     = btns_armed & (btn_flavor & ~bf_d);
+    assign bt_p     = btns_armed & (btn_type   & ~bt_d);
+    assign bs_p     = btns_armed & (btn_size   & ~bs_d);
+    assign bstart_p = btns_armed & (btn_start  & ~bstart_d);
 
     //============================================================
     // Top-level state machine
@@ -98,14 +97,28 @@ module coffeeSystem #(
     state_t state;
 
     // Selections (only change in S_SELECT)
-    logic flavor;
-    logic [2:0] dType;
-    logic [1:0] dSize;
+    logic        flavor;
+    logic [2:0]  dType;
+    logic [1:0]  dSize;
 
-    assign cur_flavor = flavor;
-    assign cur_type   = dType;
-    assign cur_size   = dSize;
-    assign sys_state  = state;
+    // Latched selections (captured on successful Start)
+    logic        flavor_run;
+    logic [2:0]  dType_run;
+    logic [1:0]  dSize_run;
+
+    // Outputs show live while selecting, latched while running
+    always_comb begin
+        sys_state = state;
+        if (state == S_SELECT) begin
+            cur_flavor = flavor;
+            cur_type   = dType;
+            cur_size   = dSize;
+        end else begin
+            cur_flavor = flavor_run;
+            cur_type   = dType_run;
+            cur_size   = dSize_run;
+        end
+    end
 
     //============================================================
     // Recipe lookup (index = type*3 + size) 0..14
@@ -114,9 +127,8 @@ module coffeeSystem #(
     coffee_recipe_t recipe_live;
 
     always_comb begin
-        // keep this strictly 4-bit (avoids truncation warnings)
-        rIndex      = ( {1'b0,dType} * 4'd3 ) + {2'b0,dSize};
-        recipe_live = coffee_recipe_t'(recipes[rIndex]);
+        rIndex       = ( {1'b0,dType} * 4'd3 ) + {2'b0,dSize};
+        recipe_live  = coffee_recipe_t'(recipes[rIndex]);
     end
 
     // Latch recipe when starting (so it cannot change mid-brew)
@@ -132,7 +144,7 @@ module coffeeSystem #(
          r_grinder_time, r_cocoa_time, r_add_creamer} = recipe_lat;
     end
 
-    // Also unpack live recipe for selection validity checks
+    // Unpack live recipe fields (for ingredient checks gating Start)
     logic       lv_load_filter, lv_add_creamer;
     logic [3:0] lv_pour_time, lv_hot_water_time, lv_grinder_time, lv_cocoa_time;
     logic       lv_unused_HP;
@@ -143,49 +155,60 @@ module coffeeSystem #(
     end
 
     //============================================================
-    // Selection/system invalid condition => err_mask (continuous)
+    // SYSTEM errors (continuous)
     //============================================================
+    logic [15:0] sys_err_mask;
+
     always_comb begin
-        err_mask = 16'b0;
+        sys_err_mask = 16'b0;
 
-        // Paper errors
-        if (PAPER_LEVEL == 2'b00) err_mask[E_PAPER_NOT_INST] = 1'b1;
-        else if (PAPER_LEVEL == 2'b01) err_mask[E_PAPER_EMPTY] = 1'b1;
+        if (PAPER_LEVEL == 2'b00)      sys_err_mask[E_PAPER_NOT_INST] = 1'b1;
+        else if (PAPER_LEVEL == 2'b01) sys_err_mask[E_PAPER_EMPTY]    = 1'b1;
 
-        // Water pressure errors
-        if (W_PRESSURE == 2'b11) err_mask[E_PRESS_ERR] = 1'b1;
-        else if (W_PRESSURE == 2'b10) err_mask[E_PRESS_HIGH] = 1'b1;
+        if (W_PRESSURE == 2'b11)      sys_err_mask[E_PRESS_ERR]  = 1'b1;
+        else if (W_PRESSURE == 2'b10) sys_err_mask[E_PRESS_HIGH] = 1'b1;
 
-        // Hardware status error
-        if (STATUS == 1'b0) err_mask[E_STATUS_ERR] = 1'b1;
-
-        // Coffee needed? (only if grinder_time != 0)
-        if (lv_grinder_time != 4'd0) begin
-            if (!flavor && BIN_0_AMPTY) err_mask[E_NO_COFFEE0] = 1'b1;
-            if ( flavor && BIN_1_AMPTY) err_mask[E_NO_COFFEE1] = 1'b1;
-        end
-
-        // Chocolate needed? (only if cocoa_time != 0)
-        if ((lv_cocoa_time != 4'd0) && CH_AMPTY) err_mask[E_NO_CHOC] = 1'b1;
-
-        // Creamer needed? (only if recipe requests it)
-        if (lv_add_creamer && ND_AMPTY) err_mask[E_NO_CREAMER] = 1'b1;
+        if (STATUS == 1'b0) sys_err_mask[E_STATUS_ERR] = 1'b1;
     end
 
-    wire error_condition = |err_mask;
+    wire sys_error_condition = |sys_err_mask;
 
     //============================================================
-    // Brewing phase machine (timed steps)
+    // INGREDIENT errors (only latched/displayed after Start is pressed)
+    //============================================================
+    logic [15:0] ing_fail_mask;
+    logic [15:0] ing_err_latch;
+
+    always_comb begin
+        ing_fail_mask = 16'b0;
+
+        if (lv_grinder_time != 4'd0) begin
+            if (!flavor && BIN_0_AMPTY) ing_fail_mask[E_NO_COFFEE0] = 1'b1;
+            if ( flavor && BIN_1_AMPTY) ing_fail_mask[E_NO_COFFEE1] = 1'b1;
+        end
+
+        if ((lv_cocoa_time != 4'd0) && CH_AMPTY) ing_fail_mask[E_NO_CHOC] = 1'b1;
+        if (lv_add_creamer && ND_AMPTY)          ing_fail_mask[E_NO_CREAMER] = 1'b1;
+    end
+
+    assign err_mask = sys_err_mask | ing_err_latch;
+
+    // Hold ingredient error on LCD briefly (still in SELECT)
+    localparam int TICKS_PER_SEC = (CLK_HZ / SPEEDUP_DIV);
+    localparam int ING_ERR_HOLD_SECS = 2;
+
+    logic [31:0] ing_tick_cnt;
+    logic [3:0]  ing_secs_left;
+
+    //============================================================
+    // Brewing phase machine
     //============================================================
     typedef enum logic [2:0] {
         PH_PAPER=3'd0, PH_GRIND=3'd1, PH_COCOA=3'd2, PH_POUR=3'd3, PH_WATER=3'd4, PH_DONE=3'd5
     } phase_t;
 
     phase_t phase;
-
     assign brew_phase = phase;
-
-    localparam int TICKS_PER_SEC = (CLK_HZ / SPEEDUP_DIV);
 
     logic [31:0] tick_cnt;
     logic [3:0]  sec_left;
@@ -193,7 +216,7 @@ module coffeeSystem #(
     function automatic [3:0] phase_duration(input phase_t p);
         begin
             case (p)
-                PH_PAPER: phase_duration = (r_load_filter) ? 4'd1 : 4'd0;  // 1s if required
+                PH_PAPER: phase_duration = (r_load_filter) ? 4'd1 : 4'd0;
                 PH_GRIND: phase_duration = r_grinder_time;
                 PH_COCOA: phase_duration = r_cocoa_time;
                 PH_POUR:  phase_duration = r_pour_time;
@@ -216,7 +239,6 @@ module coffeeSystem #(
         end
     endfunction
 
-    // Synthesis-safe "skip zero-duration phases" (bounded loop)
     function automatic phase_t first_nonzero_phase(input phase_t start_p);
         phase_t p;
         int k;
@@ -224,9 +246,9 @@ module coffeeSystem #(
             p = start_p;
             for (k = 0; k < 6; k++) begin
                 if (p == PH_DONE) begin
-                    // keep PH_DONE
+                    // keep
                 end else if (phase_duration(p) != 4'd0) begin
-                    // keep p
+                    // keep
                 end else begin
                     p = next_phase(p);
                 end
@@ -236,7 +258,7 @@ module coffeeSystem #(
     endfunction
 
     //============================================================
-    // Progress (0..16) across all recipe steps (BREW only)
+    // Progress 0..16 across all recipe steps
     //============================================================
     logic [7:0] total_sec;
     logic [7:0] elapsed_sec;
@@ -276,6 +298,10 @@ module coffeeSystem #(
             dType          <= 3'd0;
             dSize          <= 2'd0;
 
+            flavor_run     <= 1'b0;
+            dType_run      <= 3'd0;
+            dSize_run      <= 2'd0;
+
             recipe_lat     <= '0;
 
             phase          <= PH_PAPER;
@@ -286,9 +312,50 @@ module coffeeSystem #(
             elapsed_sec    <= 8'd0;
             brew_progress16<= 5'd0;
 
+            ing_err_latch  <= 16'd0;
+            ing_tick_cnt   <= 32'd0;
+            ing_secs_left  <= 4'd0;
+
         end else begin
-            // Any error => force idle + stop timing
-            if (error_condition) begin
+            // Ingredient error latch behavior (only meaningful in SELECT)
+            if (sys_error_condition) begin
+                ing_err_latch <= 16'd0;
+                ing_tick_cnt  <= 32'd0;
+                ing_secs_left <= 4'd0;
+            end else if (state != S_SELECT) begin
+                ing_err_latch <= 16'd0;
+                ing_tick_cnt  <= 32'd0;
+                ing_secs_left <= 4'd0;
+            end else begin
+                if (bf_p || bt_p || bs_p) begin
+                    ing_err_latch <= 16'd0;
+                    ing_tick_cnt  <= 32'd0;
+                    ing_secs_left <= 4'd0;
+                end else if (ing_err_latch != 16'd0) begin
+                    if (ing_secs_left == 4'd0) begin
+                        ing_err_latch <= 16'd0;
+                        ing_tick_cnt  <= 32'd0;
+                    end else begin
+                        if (ing_tick_cnt == (TICKS_PER_SEC-1)) begin
+                            ing_tick_cnt <= 32'd0;
+                            if (ing_secs_left <= 4'd1) begin
+                                ing_err_latch <= 16'd0;
+                                ing_secs_left <= 4'd0;
+                            end else begin
+                                ing_secs_left <= ing_secs_left - 4'd1;
+                            end
+                        end else begin
+                            ing_tick_cnt <= ing_tick_cnt + 32'd1;
+                        end
+                    end
+                end else begin
+                    ing_tick_cnt  <= 32'd0;
+                    ing_secs_left <= 4'd0;
+                end
+            end
+
+            // System errors: force idle + stop timing (do NOT change selections)
+            if (sys_error_condition) begin
                 state           <= S_SELECT;
                 phase           <= PH_PAPER;
                 tick_cnt        <= 32'd0;
@@ -306,8 +373,22 @@ module coffeeSystem #(
                 case (state)
                     S_SELECT: begin
                         if (bstart_p) begin
-                            // If selection invalid, do not start (LCD will show cycling err)
-                            if (!error_condition) begin
+                            if (ing_fail_mask != 16'b0) begin
+                                ing_err_latch <= ing_fail_mask;
+                                ing_tick_cnt  <= 32'd0;
+                                ing_secs_left <= ING_ERR_HOLD_SECS[3:0];
+
+                                elapsed_sec      <= 8'd0;
+                                brew_progress16  <= 5'd0;
+                                phase            <= PH_PAPER;
+                                sec_left         <= 4'd0;
+                                tick_cnt         <= 32'd0;
+                            end else begin
+                                // SUCCESSFUL START: latch selections + recipe
+                                flavor_run <= flavor;
+                                dType_run  <= dType;
+                                dSize_run  <= dSize;
+
                                 recipe_lat      <= recipe_live;
                                 total_sec       <= calc_total_seconds(recipe_live);
                                 elapsed_sec     <= 8'd0;
@@ -317,13 +398,16 @@ module coffeeSystem #(
                                 sec_left        <= 4'd0;
                                 tick_cnt        <= 32'd0;
 
+                                ing_err_latch   <= 16'd0;
+                                ing_tick_cnt    <= 32'd0;
+                                ing_secs_left   <= 4'd0;
+
                                 state           <= S_WAIT;
                             end
                         end
                     end
 
                     S_WAIT: begin
-                        // Wait until hot water ready
                         if (W_TEMP == 1'b1) begin
                             state       <= S_BREW;
                             tick_cnt    <= 32'd0;
@@ -351,7 +435,6 @@ module coffeeSystem #(
                             if (tick_cnt == (TICKS_PER_SEC-1)) begin
                                 tick_cnt <= 32'd0;
 
-                                // advance total progress each second during brew
                                 if (elapsed_sec < total_sec)
                                     elapsed_sec <= elapsed_sec + 8'd1;
 
@@ -360,11 +443,9 @@ module coffeeSystem #(
                                     total_sec
                                 );
 
-                                // phase countdown
                                 if (sec_left != 4'd0)
                                     sec_left <= sec_left - 4'd1;
 
-                                // phase transition when this second finishes the phase
                                 if (sec_left == 4'd1) begin
                                     phase_t p1;
                                     p1      = first_nonzero_phase(next_phase(phase));
@@ -397,8 +478,7 @@ module coffeeSystem #(
         COCOA_EN     = 1'b0;
         CREAMER_EN   = 1'b0;
 
-        if (!error_condition) begin
-            // Heater while waiting/brewing and water is not hot
+        if (!sys_error_condition) begin
             if ((state != S_SELECT) && (W_TEMP == 1'b0))
                 HEAT_EN = 1'b1;
 
@@ -408,16 +488,13 @@ module coffeeSystem #(
                         PH_PAPER: PAPER_EN = 1'b1;
 
                         PH_GRIND: begin
-                            if (flavor == 1'b0) GRINDER_0_EN = 1'b1;
-                            else                GRINDER_1_EN = 1'b1;
+                            if (flavor_run == 1'b0) GRINDER_0_EN = 1'b1;
+                            else                    GRINDER_1_EN = 1'b1;
                         end
 
                         PH_COCOA: COCOA_EN = 1'b1;
-
                         PH_POUR:  POUROVER_EN = 1'b1;
-
                         PH_WATER: WATER_EN = 1'b1;
-
                         default: ;
                     endcase
                 end

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lcdIP
-Sun Nov 30 21:35:59 2025
+Sun Nov 30 22:18:35 2025
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
 
 
@@ -10,23 +10,7 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |lcdIp_Top|state
-  9. State Machine - |lcdIp_Top|lcdIp:u_lcd|st
- 10. State Machine - |lcdIp_Top|coffeeSystem:u_coffee|state
- 11. Registers Removed During Synthesis
- 12. Removed Registers Triggering Further Register Optimizations
- 13. General Register Statistics
- 14. Inverted Register Statistics
- 15. Multiplexer Restructuring Statistics (Restructuring Performed)
- 16. Parameter Settings for User Entity Instance: coffeeSystem:u_coffee
- 17. Port Connectivity Checks: "lcdIp:u_lcd"
- 18. Post-Synthesis Netlist Statistics for Top Partition
- 19. Elapsed Time Per Partition
- 20. Analysis & Synthesis Messages
- 21. Analysis & Synthesis Suppressed Messages
+  5. Analysis & Synthesis Messages
 
 
 
@@ -52,20 +36,20 @@ refer to the applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Nov 30 21:35:58 2025           ;
+; Analysis & Synthesis Status        ; Failed - Sun Nov 30 22:18:35 2025               ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Standard Edition ;
 ; Revision Name                      ; lcdIP                                           ;
 ; Top-level Entity Name              ; lcdIp_Top                                       ;
 ; Family                             ; Cyclone IV E                                    ;
-; Total logic elements               ; 812                                             ;
-;     Total combinational functions  ; 785                                             ;
-;     Dedicated logic registers      ; 229                                             ;
-; Total registers                    ; 229                                             ;
-; Total pins                         ; 37                                              ;
-; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0                                               ;
-; Embedded Multiplier 9-bit elements ; 0                                               ;
-; Total PLLs                         ; 0                                               ;
+; Total logic elements               ; N/A until Partition Merge                       ;
+;     Total combinational functions  ; N/A until Partition Merge                       ;
+;     Dedicated logic registers      ; N/A until Partition Merge                       ;
+; Total registers                    ; N/A until Partition Merge                       ;
+; Total pins                         ; N/A until Partition Merge                       ;
+; Total virtual pins                 ; N/A until Partition Merge                       ;
+; Total memory bits                  ; N/A until Partition Merge                       ;
+; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                       ;
+; Total PLLs                         ; N/A until Partition Merge                       ;
 +------------------------------------+-------------------------------------------------+
 
 
@@ -164,284 +148,11 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 10          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 10          ;
+; Maximum used               ; 1           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
-;     Processor 3            ;   0.0%      ;
-;     Processor 4            ;   0.0%      ;
-;     Processor 5            ;   0.0%      ;
-;     Processor 6            ;   0.0%      ;
-;     Processor 7            ;   0.0%      ;
-;     Processor 8            ;   0.0%      ;
-;     Processors 9-10        ;   0.0%      ;
 +----------------------------+-------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                ;
-+----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                            ; Library ;
-+----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
-; src/lcdIp_Top.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv      ;         ;
-; src/lcdIp.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv          ;         ;
-; src/coffeeSystem.sv              ; yes             ; User SystemVerilog HDL File  ; C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv   ;         ;
-; src/cmach_recp.sv                ; yes             ; User SystemVerilog HDL File  ; C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/cmach_recp.sv     ;         ;
-; src/cmach_recipes.svh            ; yes             ; User Unspecified File        ; C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/cmach_recipes.svh ;         ;
-+----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
-
-
-+--------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                  ;
-+---------------------------------------------+----------------+
-; Resource                                    ; Usage          ;
-+---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 812            ;
-;                                             ;                ;
-; Total combinational functions               ; 785            ;
-; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 498            ;
-;     -- 3 input functions                    ; 101            ;
-;     -- <=2 input functions                  ; 186            ;
-;                                             ;                ;
-; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 669            ;
-;     -- arithmetic mode                      ; 116            ;
-;                                             ;                ;
-; Total registers                             ; 229            ;
-;     -- Dedicated logic registers            ; 229            ;
-;     -- I/O registers                        ; 0              ;
-;                                             ;                ;
-; I/O pins                                    ; 37             ;
-;                                             ;                ;
-; Embedded Multiplier 9-bit elements          ; 0              ;
-;                                             ;                ;
-; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 229            ;
-; Total fan-out                               ; 3549           ;
-; Average fan-out                             ; 3.26           ;
-+---------------------------------------------+----------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                    ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------+--------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name              ; Entity Name  ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------+--------------+--------------+
-; |lcdIp_Top                 ; 785 (529)           ; 229 (114)                 ; 0           ; 0            ; 0       ; 0         ; 37   ; 0            ; |lcdIp_Top                       ; lcdIp_Top    ; work         ;
-;    |coffeeSystem:u_coffee| ; 178 (178)           ; 68 (68)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee ; coffeeSystem ; work         ;
-;    |lcdIp:u_lcd|           ; 78 (78)             ; 47 (47)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|lcdIp:u_lcd           ; lcdIp        ; work         ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------+--------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-Encoding Type:  One-Hot
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |lcdIp_Top|state                                                                                                                                                                                                                                                                                                                                                                      ;
-+-----------------------+-----------------------+----------------+--------------+------------------+------------------+-----------------+----------------+------------------+------------------+-----------------+----------------+----------------+---------------------+--------------------+------------------+----------------------+---------------+---------------+---------------+---------------+
-; Name                  ; state.S_WAIT_ENTRY_SW ; state.S_CLR_SW ; state.S_IDLE ; state.S_WAIT_WL2 ; state.S_WRITE_L2 ; state.S_WAIT_L2 ; state.S_SET_L2 ; state.S_WAIT_WL1 ; state.S_WRITE_L1 ; state.S_WAIT_L1 ; state.S_SET_L1 ; state.S_WAITON ; state.S_WAIT_DISPON ; state.S_WAIT_ENTRY ; state.S_WAIT_CLR ; state.S_WAIT_DISPOFF ; state.S_WAIT3 ; state.S_WAIT2 ; state.S_WAIT1 ; state.S_PWRUP ;
-+-----------------------+-----------------------+----------------+--------------+------------------+------------------+-----------------+----------------+------------------+------------------+-----------------+----------------+----------------+---------------------+--------------------+------------------+----------------------+---------------+---------------+---------------+---------------+
-; state.S_PWRUP         ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 0             ;
-; state.S_WAIT1         ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 1             ; 1             ;
-; state.S_WAIT2         ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 1             ; 0             ; 1             ;
-; state.S_WAIT3         ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 1             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_DISPOFF  ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 1                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_CLR      ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 1                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_ENTRY    ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 1                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_DISPON   ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 1                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAITON        ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 1              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_SET_L1        ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 1              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_L1       ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 1               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WRITE_L1      ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 1                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_WL1      ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 1                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_SET_L2        ; 0                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 1              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_L2       ; 0                     ; 0              ; 0            ; 0                ; 0                ; 1               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WRITE_L2      ; 0                     ; 0              ; 0            ; 0                ; 1                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_WL2      ; 0                     ; 0              ; 0            ; 1                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_IDLE          ; 0                     ; 0              ; 1            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_CLR_SW        ; 0                     ; 1              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-; state.S_WAIT_ENTRY_SW ; 1                     ; 0              ; 0            ; 0                ; 0                ; 0               ; 0              ; 0                ; 0                ; 0               ; 0              ; 0              ; 0                   ; 0                  ; 0                ; 0                    ; 0             ; 0             ; 0             ; 1             ;
-+-----------------------+-----------------------+----------------+--------------+------------------+------------------+-----------------+----------------+------------------+------------------+-----------------+----------------+----------------+---------------------+--------------------+------------------+----------------------+---------------+---------------+---------------+---------------+
-
-
-Encoding Type:  One-Hot
-+--------------------------------------------------------------------------------------------------+
-; State Machine - |lcdIp_Top|lcdIp:u_lcd|st                                                        ;
-+--------------+--------------+----------+-----------+----------+---------+---------+--------------+
-; Name         ; st.WAIT_DONE ; st.E_LOW ; st.E_HIGH ; st.SETUP ; st.LOAD ; st.IDLE ; st.INIT_WAIT ;
-+--------------+--------------+----------+-----------+----------+---------+---------+--------------+
-; st.INIT_WAIT ; 0            ; 0        ; 0         ; 0        ; 0       ; 0       ; 0            ;
-; st.IDLE      ; 0            ; 0        ; 0         ; 0        ; 0       ; 1       ; 1            ;
-; st.LOAD      ; 0            ; 0        ; 0         ; 0        ; 1       ; 0       ; 1            ;
-; st.SETUP     ; 0            ; 0        ; 0         ; 1        ; 0       ; 0       ; 1            ;
-; st.E_HIGH    ; 0            ; 0        ; 1         ; 0        ; 0       ; 0       ; 1            ;
-; st.E_LOW     ; 0            ; 1        ; 0         ; 0        ; 0       ; 0       ; 1            ;
-; st.WAIT_DONE ; 1            ; 0        ; 0         ; 0        ; 0       ; 0       ; 1            ;
-+--------------+--------------+----------+-----------+----------+---------+---------+--------------+
-
-
-Encoding Type:  One-Hot
-+---------------------------------------------------------------+
-; State Machine - |lcdIp_Top|coffeeSystem:u_coffee|state        ;
-+----------------+----------------+--------------+--------------+
-; Name           ; state.S_SELECT ; state.S_BREW ; state.S_WAIT ;
-+----------------+----------------+--------------+--------------+
-; state.S_SELECT ; 0              ; 0            ; 0            ;
-; state.S_WAIT   ; 1              ; 0            ; 1            ;
-; state.S_BREW   ; 1              ; 1            ; 0            ;
-+----------------+----------------+--------------+--------------+
-
-
-+---------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                            ;
-+--------------------------------------------------+------------------------------------------------------------+
-; Register name                                    ; Reason for Removal                                         ;
-+--------------------------------------------------+------------------------------------------------------------+
-; lcdIp:u_lcd|lcd_rw                               ; Stuck at GND due to stuck port data_in                     ;
-; coffeeSystem:u_coffee|recipe_lat.grinder_time[3] ; Merged with coffeeSystem:u_coffee|recipe_lat.cocoa_time[3] ;
-; coffeeSystem:u_coffee|recipe_lat.cocoa_time[3]   ; Stuck at GND due to stuck port data_in                     ;
-; state~21                                         ; Lost fanout                                                ;
-; state~22                                         ; Lost fanout                                                ;
-; state~23                                         ; Lost fanout                                                ;
-; state~24                                         ; Lost fanout                                                ;
-; state~25                                         ; Lost fanout                                                ;
-; state~26                                         ; Lost fanout                                                ;
-; lcdIp:u_lcd|st~11                                ; Lost fanout                                                ;
-; lcdIp:u_lcd|st~12                                ; Lost fanout                                                ;
-; lcdIp:u_lcd|st~13                                ; Lost fanout                                                ;
-; op[1]                                            ; Stuck at GND due to stuck port data_in                     ;
-; lcdIp:u_lcd|op_latched[1]                        ; Stuck at GND due to stuck port data_in                     ;
-; Total Number of Removed Registers = 14           ;                                                            ;
-+--------------------------------------------------+------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                        ;
-+---------------+---------------------------+----------------------------------------+
-; Register name ; Reason for Removal        ; Registers Removed due to This Register ;
-+---------------+---------------------------+----------------------------------------+
-; op[1]         ; Stuck at GND              ; lcdIp:u_lcd|op_latched[1]              ;
-;               ; due to stuck port data_in ;                                        ;
-+---------------+---------------------------+----------------------------------------+
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 229   ;
-; Number of registers using Synchronous Clear  ; 125   ;
-; Number of registers using Synchronous Load   ; 6     ;
-; Number of registers using Asynchronous Clear ; 115   ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 124   ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+---------------------------------------------------+
-; Inverted Register Statistics                      ;
-+-----------------------------------------+---------+
-; Inverted Register                       ; Fan out ;
-+-----------------------------------------+---------+
-; lcdIp:u_lcd|t[19]                       ; 3       ;
-; lcdIp:u_lcd|t[17]                       ; 3       ;
-; lcdIp:u_lcd|t[16]                       ; 3       ;
-; lcdIp:u_lcd|t[14]                       ; 3       ;
-; lcdIp:u_lcd|t[13]                       ; 3       ;
-; lcdIp:u_lcd|t[12]                       ; 3       ;
-; lcdIp:u_lcd|t[8]                        ; 3       ;
-; lcdIp:u_lcd|t[7]                        ; 3       ;
-; lcdIp:u_lcd|t[5]                        ; 3       ;
-; lcdIp:u_lcd|t[4]                        ; 3       ;
-; lcdIp:u_lcd|busy                        ; 42      ;
-; Total number of inverted registers = 11 ;         ;
-+-----------------------------------------+---------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                    ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
-; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |lcdIp_Top|warn_cnt[13]                       ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|tick_cnt[0]  ;
-; 8:1                ; 3 bits    ; 15 LEs        ; 9 LEs                ; 6 LEs                  ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|phase[2]     ;
-; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |lcdIp_Top|idx[4]                             ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[18]                  ;
-; 8:1                ; 6 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[2]                   ;
-; 23:1               ; 2 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|sec_left[2]  ;
-; 16:1               ; 32 bits   ; 320 LEs       ; 32 LEs               ; 288 LEs                ; Yes        ; |lcdIp_Top|dly[10]                            ;
-; 6:1                ; 7 bits    ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[14]                  ;
-; 8:1                ; 3 bits    ; 15 LEs        ; 6 LEs                ; 9 LEs                  ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[8]                   ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|warn_sel                           ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|PAPER_EN     ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|GRINDER_0_EN ;
-; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|state        ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |lcdIp_Top|lcdIp:u_lcd|Selector25             ;
-; 13:1               ; 4 bits    ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; No         ; |lcdIp_Top|state                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
-
-
-+--------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: coffeeSystem:u_coffee ;
-+----------------+----------+----------------------------------------+
-; Parameter Name ; Value    ; Type                                   ;
-+----------------+----------+----------------------------------------+
-; CLK_HZ         ; 50000000 ; Signed Integer                         ;
-; SPEEDUP_DIV    ; 1        ; Signed Integer                         ;
-+----------------+----------+----------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "lcdIp:u_lcd"                                                                               ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port        ; Type   ; Severity ; Details                                                                             ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; systemReady ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+-----------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; boundary_port         ; 37                          ;
-; cycloneiii_ff         ; 229                         ;
-;     CLR               ; 26                          ;
-;     CLR SLD           ; 6                           ;
-;     ENA               ; 4                           ;
-;     ENA CLR           ; 51                          ;
-;     ENA CLR SCLR      ; 32                          ;
-;     ENA SCLR          ; 37                          ;
-;     SCLR              ; 56                          ;
-;     plain             ; 17                          ;
-; cycloneiii_lcell_comb ; 789                         ;
-;     arith             ; 116                         ;
-;         2 data inputs ; 116                         ;
-;     normal            ; 673                         ;
-;         0 data inputs ; 2                           ;
-;         1 data inputs ; 8                           ;
-;         2 data inputs ; 64                          ;
-;         3 data inputs ; 101                         ;
-;         4 data inputs ; 498                         ;
-;                       ;                             ;
-; Max LUT depth         ; 12.00                       ;
-; Average LUT depth     ; 5.49                        ;
-+-----------------------+-----------------------------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:02     ;
-+----------------+--------------+
 
 
 +-------------------------------+
@@ -450,7 +161,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
-    Info: Processing started: Sun Nov 30 21:35:47 2025
+    Info: Processing started: Sun Nov 30 22:18:27 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lcdIP -c lcdIP
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 10 of the 10 processors detected
@@ -464,75 +175,17 @@ Info (12021): Found 1 design units, including 1 entities, in source file src/cof
     Info (12023): Found entity 1: coffeeSystem File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file src/cmach_recp.sv
     Info (12023): Found entity 1: cmach_recp File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/cmach_recp.sv Line: 3
-Info (12127): Elaborating entity "lcdIp_Top" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(194): object "m1_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 194
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(195): object "m1_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 195
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(196): object "m2_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 196
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(197): object "m2_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 197
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(198): object "m3_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 198
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(199): object "m3_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 199
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(200): object "m4_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 200
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(201): object "m4_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 201
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(202): object "m5_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 202
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(203): object "m5_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 203
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(204): object "m6_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 204
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(205): object "m6_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 205
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(206): object "m7_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 206
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(207): object "m7_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 207
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(208): object "m8_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 208
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(209): object "m8_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 209
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(210): object "m9_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 210
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(211): object "m9_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 211
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(212): object "m10_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 212
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(213): object "m10_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 213
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(216): object "m11_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 216
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(217): object "m11_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 217
-Warning (10230): Verilog HDL assignment warning at lcdIp_Top.sv(472): truncated value with size 32 to match size of target (5) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 472
-Warning (10230): Verilog HDL assignment warning at lcdIp_Top.sv(502): truncated value with size 32 to match size of target (5) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 502
-Info (12128): Elaborating entity "cmach_recp" for hierarchy "cmach_recp:u_recipes" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 62
-Info (12128): Elaborating entity "coffeeSystem" for hierarchy "coffeeSystem:u_coffee" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 114
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(127): object "r_load_filter" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 127
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(128): object "r_pour_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 128
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(128): object "r_hot_water_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 128
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(128): object "r_grinder_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 128
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(128): object "r_cocoa_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 128
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(136): object "_unused_HP" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 136
-Info (12128): Elaborating entity "lcdIp" for hierarchy "lcdIp:u_lcd" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 136
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(41): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 41
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(58): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 58
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(76): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 76
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(82): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 82
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(84): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 84
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(91): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 91
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(93): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 93
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(100): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 100
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(102): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 102
-Warning (10230): Verilog HDL assignment warning at lcdIp.sv(108): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 108
-Info (13000): Registers with preset signals will power-up high File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 52
-Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LCD_RW" is stuck at GND File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 38
-    Warning (13410): Pin "LCD_ON" is stuck at VCC File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 40
-    Warning (13410): Pin "LCD_BLON" is stuck at VCC File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 42
-Info (286030): Timing-Driven Synthesis is running
-Info (17049): 9 registers lost all their fanouts during netlist optimizations.
-Info (144001): Generated suppressed messages file C:/Users/anicolazzo/Documents/GitHub/coffee-maker/output_files/lcdIP.map.smsg
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 849 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 16 input pins
-    Info (21059): Implemented 21 output pins
-    Info (21061): Implemented 812 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 45 warnings
-    Info: Peak virtual memory: 4832 megabytes
-    Info: Processing ended: Sun Nov 30 21:35:59 2025
-    Info: Elapsed time: 00:00:12
-    Info: Total CPU time (on all processors): 00:00:23
-
-
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in C:/Users/anicolazzo/Documents/GitHub/coffee-maker/output_files/lcdIP.map.smsg.
+Error (10883): SystemVerilog error at lcdIp_Top.sv(173): non-void function next_err_idx must return a value File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 173
+Error (10883): SystemVerilog error at lcdIp_Top.sv(174): non-void function next_err_idx must return a value File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 174
+Error (10883): SystemVerilog error at lcdIp_Top.sv(175): non-void function next_err_idx must return a value File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 175
+Error (10883): SystemVerilog error at lcdIp_Top.sv(176): non-void function next_err_idx must return a value File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 176
+Error (10883): SystemVerilog error at lcdIp_Top.sv(177): non-void function next_err_idx must return a value File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 177
+Error (10883): SystemVerilog error at lcdIp_Top.sv(178): non-void function next_err_idx must return a value File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 178
+Error (10883): SystemVerilog error at lcdIp_Top.sv(179): non-void function next_err_idx must return a value File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 179
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 7 errors, 1 warning
+    Error: Peak virtual memory: 4719 megabytes
+    Error: Processing ended: Sun Nov 30 22:18:35 2025
+    Error: Elapsed time: 00:00:08
+    Error: Total CPU time (on all processors): 00:00:21
 
 

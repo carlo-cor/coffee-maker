@@ -76,55 +76,15 @@
 					"strict" : false
 				},
 				{
-					"name" : "W_TEMP",
-					"strict" : false
-				},
-				{
-					"name" : "PAPER_LEVEL[1]",
-					"strict" : false
-				},
-				{
-					"name" : "STATUS",
-					"strict" : false
-				},
-				{
-					"name" : "W_PRESSURE[1]",
-					"strict" : false
-				},
-				{
-					"name" : "BTN_START",
-					"strict" : false
-				},
-				{
-					"name" : "CLOCK_50",
-					"strict" : false
-				},
-				{
-					"name" : "BTN_FLAVOR",
-					"strict" : false
-				},
-				{
-					"name" : "KEY",
-					"strict" : false
-				},
-				{
-					"name" : "BTN_TYPE",
-					"strict" : false
-				},
-				{
-					"name" : "BTN_SIZE",
-					"strict" : false
-				},
-				{
-					"name" : "PAPER_LEVEL[0]",
-					"strict" : false
-				},
-				{
-					"name" : "W_PRESSURE[0]",
+					"name" : "BIN_0_AMPTY",
 					"strict" : false
 				},
 				{
 					"name" : "BIN_1_AMPTY",
+					"strict" : false
+				},
+				{
+					"name" : "W_PRESSURE[1]",
 					"strict" : false
 				},
 				{
@@ -136,7 +96,47 @@
 					"strict" : false
 				},
 				{
-					"name" : "BIN_0_AMPTY",
+					"name" : "PAPER_LEVEL[1]",
+					"strict" : false
+				},
+				{
+					"name" : "STATUS",
+					"strict" : false
+				},
+				{
+					"name" : "W_TEMP",
+					"strict" : false
+				},
+				{
+					"name" : "CLOCK_50",
+					"strict" : false
+				},
+				{
+					"name" : "BTN_TYPE",
+					"strict" : false
+				},
+				{
+					"name" : "BTN_SIZE",
+					"strict" : false
+				},
+				{
+					"name" : "BTN_FLAVOR",
+					"strict" : false
+				},
+				{
+					"name" : "BTN_START",
+					"strict" : false
+				},
+				{
+					"name" : "KEY",
+					"strict" : false
+				},
+				{
+					"name" : "PAPER_LEVEL[0]",
+					"strict" : false
+				},
+				{
+					"name" : "W_PRESSURE[0]",
 					"strict" : false
 				}
 			]

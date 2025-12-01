@@ -1,3 +1,4 @@
+//======================== coffeeSystem.sv ========================
 `timescale 1ns/1ps
 `include "cmach_recipes.svh"
 
@@ -114,7 +115,7 @@ module coffeeSystem #(
 
     always_comb begin
         // keep this strictly 4-bit (avoids truncation warnings)
-        rIndex     = ( {1'b0,dType} * 4'd3 ) + {2'b0,dSize};
+        rIndex      = ( {1'b0,dType} * 4'd3 ) + {2'b0,dSize};
         recipe_live = coffee_recipe_t'(recipes[rIndex]);
     end
 

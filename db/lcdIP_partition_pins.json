@@ -76,11 +76,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "BIN_0_AMPTY",
+					"name" : "BIN_1_AMPTY",
 					"strict" : false
 				},
 				{
-					"name" : "BIN_1_AMPTY",
+					"name" : "BIN_0_AMPTY",
 					"strict" : false
 				},
 				{
@@ -108,6 +108,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "BTN_FLAVOR",
+					"strict" : false
+				},
+				{
 					"name" : "CLOCK_50",
 					"strict" : false
 				},
@@ -117,10 +121,6 @@
 				},
 				{
 					"name" : "BTN_SIZE",
-					"strict" : false
-				},
-				{
-					"name" : "BTN_FLAVOR",
 					"strict" : false
 				},
 				{

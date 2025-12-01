@@ -1,1 +1,1 @@
-Warning (10268): Verilog HDL information at coffeeSystem.sv(270): always construct contains both blocking and non-blocking assignments File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 270
+Warning (10268): Verilog HDL information at coffeeSystem.sv(271): always construct contains both blocking and non-blocking assignments File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 271

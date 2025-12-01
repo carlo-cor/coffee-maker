@@ -1,3 +1,4 @@
+//======================== lcdIp_Top.sv ========================
 `timescale 1ns/1ps
 `include "cmach_recipes.svh"
 
@@ -177,6 +178,45 @@ module lcdIp_Top (
         else disp_cnt <= disp_cnt + 32'd1;
     end
 
+    //===========================================================
+    // PLEASE ENJOY screen (post-brew)
+    //===========================================================
+    localparam [3:0] ENJOY_SECS = 4'd3;
+
+    reg  [1:0] sys_state_d;
+    reg        enjoy_active;
+    reg  [3:0] enjoy_cnt;
+
+    always @(posedge CLOCK_50) begin
+        if (rst) begin
+            sys_state_d   <= 2'd0;
+            enjoy_active  <= 1'b0;
+            enjoy_cnt     <= 4'd0;
+        end else begin
+            // previous sys_state for transition detect
+            sys_state_d <= sys_state;
+
+            // If we leave SELECT or have an error -> kill enjoy
+            if (err_present || (sys_state != 2'd0)) begin
+                enjoy_active <= 1'b0;
+                enjoy_cnt    <= 4'd0;
+            end else begin
+                // Detect BREW -> SELECT (brew finished)
+                if ((sys_state_d == 2'd2) && (sys_state == 2'd0)) begin
+                    enjoy_active <= 1'b1;
+                    enjoy_cnt    <= ENJOY_SECS;
+                end else if (enjoy_active && disp_tick) begin
+                    if (enjoy_cnt <= 4'd1) begin
+                        enjoy_active <= 1'b0;
+                        enjoy_cnt    <= 4'd0;
+                    end else begin
+                        enjoy_cnt <= enjoy_cnt - 4'd1;
+                    end
+                end
+            end
+        end
+    end
+
     // --------- Quartus-safe priority encoder (NO LOOPS) ---------
     function automatic [3:0] first_set16(input logic [15:0] m);
         begin
@@ -211,8 +251,8 @@ module lcdIp_Top (
             if (m == 16'b0) begin
                 next_set16 = cur;
             end else begin
-                mm = {m, m};
-                sh = {1'b0, cur} + 5'd1;
+                mm  = {m, m};
+                sh  = {1'b0, cur} + 5'd1;
                 rot = (mm >> sh);
                 r16 = rot[15:0];
 
@@ -296,10 +336,13 @@ module lcdIp_Top (
         end
     endfunction
 
+    // During "PLEASE ENJOY", suppress warnings (but NOT errors)
+    wire warn_show_eff = (warn_present && warn_show && !enjoy_active);
+
     wire [3:0] msg_sel =
-        (err_present)                 ? map_err_code_to_msg(err_code_cur) :
-        (warn_present && warn_show)   ? map_warn_code_to_msg(warn_code_cur) :
-                                        4'd0;
+        (err_present)       ? map_err_code_to_msg(err_code_cur) :
+        (warn_show_eff)     ? map_warn_code_to_msg(warn_code_cur) :
+                              4'd0;
 
     //===========================================================
     // LCD message ROMs
@@ -436,8 +479,13 @@ module lcdIp_Top (
         logic [127:0] L1, L2;
         begin
             if (sel == 4'd0) begin
-                L1 = mk_line1(cur_flavor, cur_type, cur_size);
-                L2 = mk_line2(sys_state, brew_phase, brew_progress16);
+                if (enjoy_active) begin
+                    L1 = {"C","o","f","f","e","e"," ","C","o","m","p","l","e","t","e"," "};
+                    L2 = {"P","l","e","a","s","e"," ","E","n","j","o","y","!"," "," "," "};
+                end else begin
+                    L1 = mk_line1(cur_flavor, cur_type, cur_size);
+                    L2 = mk_line2(sys_state, brew_phase, brew_progress16);
+                end
                 get_byte = (line) ? byte16(L2, k) : byte16(L1, k);
             end else begin
                 case (sel)
@@ -466,21 +514,21 @@ module lcdIp_Top (
     // LCD init/write FSM (refreshes on msg_sel OR normal content changes)
     //===========================================================
     localparam [5:0]
-        S_PWRUP     = 6'd0,
-        S_WAIT1     = 6'd2,
-        S_WAIT2     = 6'd4,
-        S_WAIT3     = 6'd6,
+        S_PWRUP          = 6'd0,
+        S_WAIT1          = 6'd2,
+        S_WAIT2          = 6'd4,
+        S_WAIT3          = 6'd6,
         S_WAIT_DISPOFF   = 6'd8,
-        S_WAIT_CLR        = 6'd10,
-        S_WAIT_ENTRY      = 6'd12,
-        S_WAIT_DISPON     = 6'd14,
-        S_WAITON          = 6'd16,
-        S_SET_L1    = 6'd17,  S_WAIT_L1 = 6'd18,
-        S_WRITE_L1  = 6'd19,  S_WAIT_WL1= 6'd20,
-        S_SET_L2    = 6'd21,  S_WAIT_L2 = 6'd22,
-        S_WRITE_L2  = 6'd23,  S_WAIT_WL2= 6'd24,
-        S_IDLE      = 6'd25,
-        S_CLR_SW    = 6'd26,  S_WAIT_ENTRY_SW= 6'd27;
+        S_WAIT_CLR       = 6'd10,
+        S_WAIT_ENTRY     = 6'd12,
+        S_WAIT_DISPON    = 6'd14,
+        S_WAITON         = 6'd16,
+        S_SET_L1         = 6'd17,  S_WAIT_L1 = 6'd18,
+        S_WRITE_L1       = 6'd19,  S_WAIT_WL1= 6'd20,
+        S_SET_L2         = 6'd21,  S_WAIT_L2 = 6'd22,
+        S_WRITE_L2       = 6'd23,  S_WAIT_WL2= 6'd24,
+        S_IDLE           = 6'd25,
+        S_CLR_SW         = 6'd26,  S_WAIT_ENTRY_SW= 6'd27;
 
     reg [5:0]  state = S_PWRUP;
     reg [31:0] dly = 0;
@@ -500,11 +548,13 @@ module lcdIp_Top (
     reg [1:0] prev_sys_state;
     reg [2:0] prev_brew_phase;
     reg [4:0] prev_brew_prog;
+    reg       prev_enjoy;
 
     wire msg_changed = (msg_sel != prev_msg_sel);
 
     wire normal_changed = (msg_sel == 4'd0) &&
-                          ((prev_flavor     != cur_flavor) ||
+                          ((prev_enjoy      != enjoy_active) ||
+                           (prev_flavor     != cur_flavor) ||
                            (prev_type       != cur_type)   ||
                            (prev_size       != cur_size)   ||
                            (prev_sys_state  != sys_state)  ||
@@ -522,6 +572,7 @@ module lcdIp_Top (
             prev_sys_state  <= 2'd0;
             prev_brew_phase <= 3'd0;
             prev_brew_prog  <= 5'd0;
+            prev_enjoy      <= 1'b0;
             change_detected <= 1'b0;
         end else begin
             if (msg_changed || normal_changed)
@@ -536,6 +587,7 @@ module lcdIp_Top (
             prev_sys_state  <= sys_state;
             prev_brew_phase <= brew_phase;
             prev_brew_prog  <= brew_progress16;
+            prev_enjoy      <= enjoy_active;
         end
     end
 

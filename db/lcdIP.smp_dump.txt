@@ -22,20 +22,6 @@ state.S_IDLE 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 state.S_CLR_SW 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 state.S_WAIT_ENTRY_SW 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
 
-State Machine - |lcdIp_Top|prev_error_sel
-Name prev_error_sel.1010 prev_error_sel.1001 prev_error_sel.1000 prev_error_sel.0111 prev_error_sel.0110 prev_error_sel.0101 prev_error_sel.0100 prev_error_sel.0011 prev_error_sel.0010 prev_error_sel.0001 prev_error_sel.0000 
-prev_error_sel.0000 0 0 0 0 0 0 0 0 0 0 0 
-prev_error_sel.0001 0 0 0 0 0 0 0 0 0 1 1 
-prev_error_sel.0010 0 0 0 0 0 0 0 0 1 0 1 
-prev_error_sel.0011 0 0 0 0 0 0 0 1 0 0 1 
-prev_error_sel.0100 0 0 0 0 0 0 1 0 0 0 1 
-prev_error_sel.0101 0 0 0 0 0 1 0 0 0 0 1 
-prev_error_sel.0110 0 0 0 0 1 0 0 0 0 0 1 
-prev_error_sel.0111 0 0 0 1 0 0 0 0 0 0 1 
-prev_error_sel.1000 0 0 1 0 0 0 0 0 0 0 1 
-prev_error_sel.1001 0 1 0 0 0 0 0 0 0 0 1 
-prev_error_sel.1010 1 0 0 0 0 0 0 0 0 0 1 
-
 State Machine - |lcdIp_Top|lcdIp:u_lcd|st
 Name st.WAIT_DONE st.E_LOW st.E_HIGH st.SETUP st.LOAD st.IDLE st.INIT_WAIT 
 st.INIT_WAIT 0 0 0 0 0 0 0 
@@ -45,3 +31,9 @@ st.SETUP 0 0 0 1 0 0 1
 st.E_HIGH 0 0 1 0 0 0 1 
 st.E_LOW 0 1 0 0 0 0 1 
 st.WAIT_DONE 1 0 0 0 0 0 1 
+
+State Machine - |lcdIp_Top|coffeeSystem:u_coffee|state
+Name state.S_SELECT state.S_BREW state.S_WAIT 
+state.S_SELECT 0 0 0 
+state.S_WAIT 1 0 1 
+state.S_BREW 1 1 0 

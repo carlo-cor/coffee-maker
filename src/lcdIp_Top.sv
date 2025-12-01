@@ -1,4 +1,7 @@
-module coffeeMachine_Top (
+`timescale 1ns/1ps
+`include "cmach_recipes.svh"
+
+module lcdIp_Top (
     // Clock and Active-Low Reset
     input  wire        CLOCK_50,
     input  wire        KEY,            // active-low reset button
@@ -49,10 +52,20 @@ module coffeeMachine_Top (
     end
 
     //===========================================================
-    // Recipes
+    // Recipes (FIXED: cmach_recp outputs packed bits, cast to coffee_recipe_t)
     //===========================================================
-    coffee_recipe_t recipes [0:14];
-    cmach_recp u_recipes (.recipes(recipes));
+    localparam int RECIPE_W = $bits(coffee_recipe_t);
+
+    logic [RECIPE_W-1:0] recipes_bits [0:14];
+    coffee_recipe_t      recipes      [0:14];
+
+    cmach_recp u_recipes (.recipes(recipes_bits));
+
+    integer ri;
+    always_comb begin
+        for (ri = 0; ri < 15; ri = ri + 1)
+            recipes[ri] = coffee_recipe_t'(recipes_bits[ri]);
+    end
 
     //===========================================================
     // Coffee control system

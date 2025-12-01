@@ -1,1 +1,1 @@
-Info (10281): Verilog HDL Declaration information at lcdIp_Top.sv(4): object "RST" differs only in case from object "rst" in the same scope File: C:/Users/ccortez/Downloads/coffeeMaker (sync)/displayTest/lcdIp_Top.sv Line: 4
+Warning (10268): Verilog HDL information at coffeeSystem.sv(198): always construct contains both blocking and non-blocking assignments File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 198

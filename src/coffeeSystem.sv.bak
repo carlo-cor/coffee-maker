@@ -3,7 +3,7 @@
 
 module coffeeSystem #(
     parameter int CLK_HZ      = 50_000_000,
-    parameter int SPEEDUP_DIV  = 1
+    parameter int SPEEDUP_DIV  = 1          // set >1 to speed simulation
 ) (
     input  logic        clk,
     input  logic        rst,
@@ -43,7 +43,7 @@ module coffeeSystem #(
     output logic        GRINDER_1_EN,
     output logic        PAPER_EN,
 
-    // Optional extras
+    // Optional extras (safe to ignore if unused)
     output logic        COCOA_EN,
     output logic        CREAMER_EN
 );
@@ -105,18 +105,12 @@ module coffeeSystem #(
     assign cur_size   = dSize;
     assign sys_state  = state;
 
-    // Recipe lookup (index = type*3 + size) (FIXED: no 32->4 truncation warnings)
+    // Recipe lookup (index = type*3 + size)
     logic [3:0] rIndex;
     coffee_recipe_t recipe_live;
 
     always_comb begin
-        logic [4:0] type_ext;
-        logic [4:0] size_ext;
-        logic [4:0] idx_wide;
-        type_ext = {2'b00, dType};   // 0..4
-        size_ext = {3'b000, dSize};  // 0..2
-        idx_wide = (type_ext + (type_ext << 1)) + size_ext; // type*3 + size (0..14)
-        rIndex      = idx_wide[3:0];
+        rIndex      = (dType * 3) + dSize;
         recipe_live = recipes[rIndex];
     end
 
@@ -132,17 +126,10 @@ module coffeeSystem #(
          r_grinder_time, r_cocoa_time, r_add_creamer} = recipe_lat;
     end
 
-    // (Optional) consume unused bit to quiet “assigned but never read”
-    logic _unused_HP;
-    always_comb _unused_HP = r_high_press;
-
     //========================================
     // Brewing phase machine (timed steps)
     //========================================
-    typedef enum logic [2:0] {
-        PH_PAPER=3'd0, PH_GRIND=3'd1, PH_COCOA=3'd2, PH_POUR=3'd3, PH_WATER=3'd4, PH_DONE=3'd5
-    } phase_t;
-
+    typedef enum logic [2:0] { PH_PAPER=3'd0, PH_GRIND=3'd1, PH_COCOA=3'd2, PH_POUR=3'd3, PH_WATER=3'd4, PH_DONE=3'd5 } phase_t;
     phase_t phase;
 
     localparam int TICKS_PER_SEC = (CLK_HZ / SPEEDUP_DIV);
@@ -150,7 +137,7 @@ module coffeeSystem #(
     logic [31:0] tick_cnt;
     logic [3:0]  sec_left;
 
-    function automatic [3:0] phase_duration(input phase_t p);
+    function automatic [3:0] phase_duration(phase_t p);
         begin
             case (p)
                 PH_PAPER: phase_duration = (r_load_filter) ? 4'd1 : 4'd0;  // fixed 1s if required
@@ -163,7 +150,7 @@ module coffeeSystem #(
         end
     endfunction
 
-    function automatic phase_t next_phase(input phase_t p);
+    function automatic phase_t next_phase(phase_t p);
         begin
             case (p)
                 PH_PAPER: next_phase = PH_GRIND;
@@ -176,21 +163,19 @@ module coffeeSystem #(
         end
     endfunction
 
-    // FIXED: synthesizable “skip zeros” (no while loops)
-    function automatic phase_t skip_zeros(input phase_t start);
+    task automatic start_next_nonzero_phase;
         phase_t p;
         begin
-            p = start;
-
-            if ((p == PH_PAPER) && (phase_duration(PH_PAPER) == 4'd0)) p = PH_GRIND;
-            if ((p == PH_GRIND) && (phase_duration(PH_GRIND) == 4'd0)) p = PH_COCOA;
-            if ((p == PH_COCOA) && (phase_duration(PH_COCOA) == 4'd0)) p = PH_POUR;
-            if ((p == PH_POUR)  && (phase_duration(PH_POUR)  == 4'd0)) p = PH_WATER;
-            if ((p == PH_WATER) && (phase_duration(PH_WATER) == 4'd0)) p = PH_DONE;
-
-            skip_zeros = p;
+            p = phase;
+            // advance until a phase with nonzero duration or DONE
+            while ((p != PH_DONE) && (phase_duration(p) == 4'd0)) begin
+                p = next_phase(p);
+            end
+            phase    = p;
+            sec_left = phase_duration(p);
+            tick_cnt = 32'd0;
         end
-    endfunction
+    endtask
 
     //========================================
     // State + selection + brew timing
@@ -209,7 +194,7 @@ module coffeeSystem #(
             tick_cnt   <= 32'd0;
             sec_left   <= 4'd0;
         end else begin
-            // If an error occurs, force idle and stop outputs
+            // If an error occurs, force idle and stop outputs (LCD will show error via top)
             if (error_condition) begin
                 state    <= S_SELECT;
                 phase    <= PH_PAPER;
@@ -225,6 +210,7 @@ module coffeeSystem #(
 
                 case (state)
                     S_SELECT: begin
+                        // start brew process (locks selections because state changes)
                         if (bstart_p) begin
                             recipe_lat <= recipe_live;
                             phase      <= PH_PAPER;
@@ -235,14 +221,16 @@ module coffeeSystem #(
                     end
 
                     S_WAIT: begin
+                        // Wait for hot water, then begin phased brew
                         if (W_TEMP == 1'b1) begin
-                            phase_t p0;
-                            p0 = skip_zeros(PH_PAPER);
-
                             state    <= S_BREW;
-                            phase    <= p0;
-                            sec_left <= phase_duration(p0);
+
+                            phase    <= PH_PAPER;
+                            sec_left <= 4'd0;
                             tick_cnt <= 32'd0;
+
+                            // initialize to first non-zero phase
+                            start_next_nonzero_phase();
                         end
                     end
 
@@ -253,16 +241,18 @@ module coffeeSystem #(
                             tick_cnt <= 32'd0;
                             sec_left <= 4'd0;
                         end else begin
+                            // run 1-second ticks
                             if (tick_cnt == (TICKS_PER_SEC-1)) begin
                                 tick_cnt <= 32'd0;
 
-                                if (sec_left <= 4'd1) begin
-                                    phase_t pn;
-                                    pn = skip_zeros(next_phase(phase));
-                                    phase    <= pn;
-                                    sec_left <= phase_duration(pn);
-                                end else begin
+                                if (sec_left != 4'd0)
                                     sec_left <= sec_left - 4'd1;
+
+                                // If that just hit 0, advance to next phase
+                                if (sec_left == 4'd1) begin
+                                    phase <= next_phase(phase);
+                                    // load next phase duration (and skip zeros)
+                                    start_next_nonzero_phase();
                                 end
                             end else begin
                                 tick_cnt <= tick_cnt + 32'd1;
@@ -281,14 +271,14 @@ module coffeeSystem #(
     //========================================
     always_comb begin
         // defaults
-        HEAT_EN      = 1'b0;
-        POUROVER_EN  = 1'b0;
-        WATER_EN     = 1'b0;
-        GRINDER_0_EN = 1'b0;
-        GRINDER_1_EN = 1'b0;
-        PAPER_EN     = 1'b0;
-        COCOA_EN     = 1'b0;
-        CREAMER_EN   = 1'b0;
+        HEAT_EN     = 1'b0;
+        POUROVER_EN = 1'b0;
+        WATER_EN    = 1'b0;
+        GRINDER_0_EN= 1'b0;
+        GRINDER_1_EN= 1'b0;
+        PAPER_EN    = 1'b0;
+        COCOA_EN    = 1'b0;
+        CREAMER_EN  = 1'b0;
 
         if (!error_condition) begin
             // Heater only when water is cold, and only during an active process
@@ -296,22 +286,33 @@ module coffeeSystem #(
                 HEAT_EN = 1'b1;
 
             if (state == S_BREW) begin
+                // enable per phase (only while there is time left)
                 if (sec_left != 4'd0) begin
                     case (phase)
-                        PH_PAPER: PAPER_EN = 1'b1;
+                        PH_PAPER: begin
+                            PAPER_EN = 1'b1;
+                        end
                         PH_GRIND: begin
                             if (flavor == 1'b0) GRINDER_0_EN = 1'b1;
                             else                GRINDER_1_EN = 1'b1;
                         end
-                        PH_COCOA: COCOA_EN = 1'b1;
-                        PH_POUR:  POUROVER_EN = 1'b1;
-                        PH_WATER: WATER_EN    = 1'b1;
+                        PH_COCOA: begin
+                            COCOA_EN = 1'b1;
+                        end
+                        PH_POUR: begin
+                            POUROVER_EN = 1'b1;
+                        end
+                        PH_WATER: begin
+                            WATER_EN = 1'b1;
+                        end
                         default: ;
                     endcase
                 end
 
-                if (r_add_creamer)
+                if (r_add_creamer) begin
+                    // simple behavior: keep asserted during brew; you can refine later
                     CREAMER_EN = 1'b1;
+                end
             end
         end
     end

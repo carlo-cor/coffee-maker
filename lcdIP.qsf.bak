@@ -43,6 +43,13 @@ set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.0.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:18:06  OCTOBER 23, 2025"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.0.0 Standard Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_Y2 -to CLOCK_50
 set_location_assignment PIN_M5 -to LCD_DATA[7]
 set_location_assignment PIN_M3 -to LCD_DATA[6]
@@ -57,36 +64,22 @@ set_location_assignment PIN_L4 -to LCD_EN
 set_location_assignment PIN_L5 -to LCD_ON
 set_location_assignment PIN_M2 -to LCD_RS
 set_location_assignment PIN_M1 -to LCD_RW
-set_location_assignment PIN_AC27 -to BIN_0_AMPTY
-set_location_assignment PIN_AD27 -to BIN_1_AMPTY
-set_location_assignment PIN_AB27 -to ND_AMPTY
-set_location_assignment PIN_AC26 -to CH_AMPTY
-set_location_assignment PIN_AD26 -to W_PRESSURE[0]
-set_location_assignment PIN_AC25 -to W_TEMP
-set_location_assignment PIN_AB26 -to W_PRESSURE[1]
-set_location_assignment PIN_AB28 -to PAPER_LEVEL[0]
-set_location_assignment PIN_AC28 -to PAPER_LEVEL[1]
+set_location_assignment PIN_M23 -to RST
+set_location_assignment PIN_AC28 -to BIN_0_AMPTY
+set_location_assignment PIN_AC27 -to BIN_1_AMPTY
+set_location_assignment PIN_AD27 -to ND_AMPTY
+set_location_assignment PIN_AB27 -to CH_AMPTY
+set_location_assignment PIN_AC26 -to W_PRESSURE[0]
+set_location_assignment PIN_AB26 -to W_TEMP
+set_location_assignment PIN_AD26 -to W_PRESSURE[1]
+set_location_assignment PIN_AB25 -to PAPER_LEVEL[0]
+set_location_assignment PIN_AC24 -to PAPER_LEVEL[1]
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name SYSTEMVERILOG_FILE src/lcdIp_Top.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/lcdIp.sv
 set_global_assignment -name VERILOG_FILE sync.v
 set_global_assignment -name SYSTEMVERILOG_FILE src/coffeeSystem.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/cmach_recp.sv
 set_global_assignment -name SOURCE_FILE src/cmach_recipes.svh
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_M23 -to KEY
-set_location_assignment PIN_M21 -to BTN_FLAVOR
-set_location_assignment PIN_N21 -to BTN_TYPE
-set_location_assignment PIN_R24 -to BTN_SIZE
-set_location_assignment PIN_Y23 -to BTN_START
-set_location_assignment PIN_AB25 -to STATUS
-set_location_assignment PIN_G19 -to HEAT_EN
-set_location_assignment PIN_F19 -to POUROVER_EN
-set_location_assignment PIN_E19 -to WATER_EN
-set_location_assignment PIN_F21 -to GRINDER_0_EN
-set_location_assignment PIN_F18 -to GRINDER_1_EN
-set_location_assignment PIN_E18 -to PAPER_EN
-set_location_assignment PIN_J19 -to COCOA_EN
-set_location_assignment PIN_H19 -to CREAMER_EN
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE115F29) Path("C:/Users/ccortez/Downloads/coffeeMaker/displayTest/output_files/") File("lcdIP.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE115F29) Path("C:/Users/anicolazzo/Documents/GitHub/coffee-maker/output_files/") File("lcdIP.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

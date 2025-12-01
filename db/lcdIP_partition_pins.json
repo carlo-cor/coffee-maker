@@ -4,6 +4,38 @@
 			"name" : "Top",
 			"pins" : [
 				{
+					"name" : "HEAT_EN",
+					"strict" : false
+				},
+				{
+					"name" : "POUROVER_EN",
+					"strict" : false
+				},
+				{
+					"name" : "WATER_EN",
+					"strict" : false
+				},
+				{
+					"name" : "GRINDER_0_EN",
+					"strict" : false
+				},
+				{
+					"name" : "GRINDER_1_EN",
+					"strict" : false
+				},
+				{
+					"name" : "PAPER_EN",
+					"strict" : false
+				},
+				{
+					"name" : "COCOA_EN",
+					"strict" : false
+				},
+				{
+					"name" : "CREAMER_EN",
+					"strict" : false
+				},
+				{
 					"name" : "LCD_DATA[0]",
 					"strict" : false
 				},
@@ -44,11 +76,15 @@
 					"strict" : false
 				},
 				{
-					"name" : "CLOCK_50",
+					"name" : "W_TEMP",
 					"strict" : false
 				},
 				{
-					"name" : "KEY",
+					"name" : "PAPER_LEVEL[1]",
+					"strict" : false
+				},
+				{
+					"name" : "STATUS",
 					"strict" : false
 				},
 				{
@@ -56,11 +92,31 @@
 					"strict" : false
 				},
 				{
-					"name" : "PAPER_LEVEL[0]",
+					"name" : "BTN_START",
 					"strict" : false
 				},
 				{
-					"name" : "PAPER_LEVEL[1]",
+					"name" : "CLOCK_50",
+					"strict" : false
+				},
+				{
+					"name" : "BTN_FLAVOR",
+					"strict" : false
+				},
+				{
+					"name" : "KEY",
+					"strict" : false
+				},
+				{
+					"name" : "BTN_TYPE",
+					"strict" : false
+				},
+				{
+					"name" : "BTN_SIZE",
+					"strict" : false
+				},
+				{
+					"name" : "PAPER_LEVEL[0]",
 					"strict" : false
 				},
 				{
@@ -72,7 +128,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "BIN_0_AMPTY",
+					"name" : "ND_AMPTY",
 					"strict" : false
 				},
 				{
@@ -80,7 +136,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "ND_AMPTY",
+					"name" : "BIN_0_AMPTY",
 					"strict" : false
 				}
 			]

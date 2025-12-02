@@ -92,19 +92,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "CH_AMPTY",
+					"name" : "CH_LEVEL[1]",
 					"strict" : false
 				},
 				{
-					"name" : "BIN_1_AMPTY",
+					"name" : "BIN0_LEVEL[1]",
 					"strict" : false
 				},
 				{
-					"name" : "BIN_0_AMPTY",
+					"name" : "BIN1_LEVEL[1]",
 					"strict" : false
 				},
 				{
-					"name" : "ND_AMPTY",
+					"name" : "ND_LEVEL[1]",
 					"strict" : false
 				},
 				{
@@ -128,11 +128,27 @@
 					"strict" : false
 				},
 				{
-					"name" : "PAPER_LEVEL[0]",
+					"name" : "CH_LEVEL[0]",
 					"strict" : false
 				},
 				{
 					"name" : "W_PRESSURE[0]",
+					"strict" : false
+				},
+				{
+					"name" : "PAPER_LEVEL[0]",
+					"strict" : false
+				},
+				{
+					"name" : "BIN0_LEVEL[0]",
+					"strict" : false
+				},
+				{
+					"name" : "BIN1_LEVEL[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ND_LEVEL[0]",
 					"strict" : false
 				}
 			]

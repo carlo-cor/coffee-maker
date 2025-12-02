@@ -13,11 +13,13 @@ module coffeeSystem #(
     input  logic        btn_size,
     input  logic        btn_start,
 
+    // 2-bit "levels": 00=not installed, 01=empty, 10=almost empty, 11=OK
     input  logic [1:0]  PAPER_LEVEL,
-    input  logic        BIN_0_AMPTY,
-    input  logic        BIN_1_AMPTY,
-    input  logic        ND_AMPTY,
-    input  logic        CH_AMPTY,
+    input  logic [1:0]  BIN0_LEVEL,
+    input  logic [1:0]  BIN1_LEVEL,
+    input  logic [1:0]  ND_LEVEL,
+    input  logic [1:0]  CH_LEVEL,
+
     input  logic [1:0]  W_PRESSURE,
     input  logic        W_TEMP,
     input  logic        STATUS,
@@ -61,7 +63,6 @@ module coffeeSystem #(
 
     //============================================================
     // Edge detect buttons (one action per press)
-    // FIX: prevent spurious "press" right after reset
     //============================================================
     logic bf_d, bt_d, bs_d, bstart_d;
     logic bf_p, bt_p, bs_p, bstart_p;
@@ -79,8 +80,6 @@ module coffeeSystem #(
             bt_d     <= btn_type;
             bs_d     <= btn_size;
             bstart_d <= btn_start;
-
-            // after we have sampled the inputs at least once, allow edge pulses
             btns_armed <= 1'b1;
         end
     end
@@ -96,17 +95,14 @@ module coffeeSystem #(
     typedef enum logic [1:0] { S_SELECT=2'd0, S_WAIT=2'd1, S_BREW=2'd2 } state_t;
     state_t state;
 
-    // Selections (only change in S_SELECT)
     logic        flavor;
     logic [2:0]  dType;
     logic [1:0]  dSize;
 
-    // Latched selections (captured on successful Start)
     logic        flavor_run;
     logic [2:0]  dType_run;
     logic [1:0]  dSize_run;
 
-    // Outputs show live while selecting, latched while running
     always_comb begin
         sys_state = state;
         if (state == S_SELECT) begin
@@ -127,11 +123,10 @@ module coffeeSystem #(
     coffee_recipe_t recipe_live;
 
     always_comb begin
-        rIndex       = ( {1'b0,dType} * 4'd3 ) + {2'b0,dSize};
-        recipe_live  = coffee_recipe_t'(recipes[rIndex]);
+        rIndex      = ( {1'b0,dType} * 4'd3 ) + {2'b0,dSize};
+        recipe_live = coffee_recipe_t'(recipes[rIndex]);
     end
 
-    // Latch recipe when starting (so it cannot change mid-brew)
     coffee_recipe_t recipe_lat;
 
     // Unpack latched recipe fields (positional)
@@ -174,7 +169,15 @@ module coffeeSystem #(
     wire sys_error_condition = |sys_err_mask;
 
     //============================================================
-    // INGREDIENT errors (only latched/displayed after Start is pressed)
+    // Ingredient EMPTY decode: 00/01 block brew, 10 is only warning
+    //============================================================
+    wire bin0_empty = (BIN0_LEVEL == 2'b00) || (BIN0_LEVEL == 2'b01);
+    wire bin1_empty = (BIN1_LEVEL == 2'b00) || (BIN1_LEVEL == 2'b01);
+    wire nd_empty   = (ND_LEVEL   == 2'b00) || (ND_LEVEL   == 2'b01);
+    wire ch_empty   = (CH_LEVEL   == 2'b00) || (CH_LEVEL   == 2'b01);
+
+    //============================================================
+    // INGREDIENT errors (latched/displayed after Start is pressed)
     //============================================================
     logic [15:0] ing_fail_mask;
     logic [15:0] ing_err_latch;
@@ -183,17 +186,16 @@ module coffeeSystem #(
         ing_fail_mask = 16'b0;
 
         if (lv_grinder_time != 4'd0) begin
-            if (!flavor && BIN_0_AMPTY) ing_fail_mask[E_NO_COFFEE0] = 1'b1;
-            if ( flavor && BIN_1_AMPTY) ing_fail_mask[E_NO_COFFEE1] = 1'b1;
+            if (!flavor && bin0_empty) ing_fail_mask[E_NO_COFFEE0] = 1'b1;
+            if ( flavor && bin1_empty) ing_fail_mask[E_NO_COFFEE1] = 1'b1;
         end
 
-        if ((lv_cocoa_time != 4'd0) && CH_AMPTY) ing_fail_mask[E_NO_CHOC] = 1'b1;
-        if (lv_add_creamer && ND_AMPTY)          ing_fail_mask[E_NO_CREAMER] = 1'b1;
+        if ((lv_cocoa_time != 4'd0) && ch_empty) ing_fail_mask[E_NO_CHOC] = 1'b1;
+        if (lv_add_creamer && nd_empty)          ing_fail_mask[E_NO_CREAMER] = 1'b1;
     end
 
     assign err_mask = sys_err_mask | ing_err_latch;
 
-    // Hold ingredient error on LCD briefly (still in SELECT)
     localparam int TICKS_PER_SEC = (CLK_HZ / SPEEDUP_DIV);
     localparam int ING_ERR_HOLD_SECS = 2;
 
@@ -414,12 +416,8 @@ module coffeeSystem #(
                             elapsed_sec <= 8'd0;
                             brew_progress16 <= 5'd0;
 
-                            begin
-                                phase_t p0;
-                                p0      = first_nonzero_phase(PH_PAPER);
-                                phase   <= p0;
-                                sec_left<= phase_duration(p0);
-                            end
+                            phase    <= first_nonzero_phase(PH_PAPER);
+                            sec_left <= phase_duration(first_nonzero_phase(PH_PAPER));
                         end
                     end
 
@@ -447,10 +445,8 @@ module coffeeSystem #(
                                     sec_left <= sec_left - 4'd1;
 
                                 if (sec_left == 4'd1) begin
-                                    phase_t p1;
-                                    p1      = first_nonzero_phase(next_phase(phase));
-                                    phase   <= p1;
-                                    sec_left<= phase_duration(p1);
+                                    phase    <= first_nonzero_phase(next_phase(phase));
+                                    sec_left <= phase_duration(first_nonzero_phase(next_phase(phase)));
                                 end
 
                             end else begin

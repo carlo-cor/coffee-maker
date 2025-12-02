@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lcdIP
-Sun Nov 30 23:14:00 2025
+Mon Dec 01 23:28:46 2025
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
 
 
@@ -27,7 +27,6 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
  19. Post-Synthesis Netlist Statistics for Top Partition
  20. Elapsed Time Per Partition
  21. Analysis & Synthesis Messages
- 22. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -53,16 +52,16 @@ refer to the applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Nov 30 23:14:00 2025           ;
+; Analysis & Synthesis Status        ; Successful - Mon Dec 01 23:28:46 2025           ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Standard Edition ;
 ; Revision Name                      ; lcdIP                                           ;
 ; Top-level Entity Name              ; lcdIp_Top                                       ;
 ; Family                             ; Cyclone IV E                                    ;
-; Total logic elements               ; 1,696                                           ;
-;     Total combinational functions  ; 1,666                                           ;
+; Total logic elements               ; 1,704                                           ;
+;     Total combinational functions  ; 1,674                                           ;
 ;     Dedicated logic registers      ; 335                                             ;
 ; Total registers                    ; 335                                             ;
-; Total pins                         ; 37                                              ;
+; Total pins                         ; 41                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
@@ -172,7 +171,7 @@ refer to the applicable agreement for further details.
 ;     Processor 2            ;   0.1%      ;
 ;     Processor 3            ;   0.1%      ;
 ;     Processor 4            ;   0.1%      ;
-;     Processor 5            ;   0.0%      ;
+;     Processor 5            ;   0.1%      ;
 ;     Processor 6            ;   0.0%      ;
 ;     Processor 7            ;   0.0%      ;
 ;     Processor 8            ;   0.0%      ;
@@ -207,30 +206,30 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 1,696          ;
+; Estimated Total logic elements              ; 1,704          ;
 ;                                             ;                ;
-; Total combinational functions               ; 1666           ;
+; Total combinational functions               ; 1674           ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 999            ;
-;     -- 3 input functions                    ; 340            ;
-;     -- <=2 input functions                  ; 327            ;
+;     -- 4 input functions                    ; 1010           ;
+;     -- 3 input functions                    ; 331            ;
+;     -- <=2 input functions                  ; 333            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 1390           ;
+;     -- normal mode                          ; 1398           ;
 ;     -- arithmetic mode                      ; 276            ;
 ;                                             ;                ;
 ; Total registers                             ; 335            ;
 ;     -- Dedicated logic registers            ; 335            ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
-; I/O pins                                    ; 37             ;
+; I/O pins                                    ; 41             ;
 ;                                             ;                ;
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ;                                             ;                ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
 ; Maximum fan-out                             ; 335            ;
-; Total fan-out                               ; 6883           ;
-; Average fan-out                             ; 3.32           ;
+; Total fan-out                               ; 6916           ;
+; Average fan-out                             ; 3.31           ;
 +---------------------------------------------+----------------+
 
 
@@ -239,12 +238,12 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                    ; Entity Name         ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |lcdIp_Top                                ; 1666 (930)          ; 335 (154)                 ; 0           ; 0            ; 0       ; 0         ; 37   ; 0            ; |lcdIp_Top                                                                                                                                             ; lcdIp_Top           ; work         ;
-;    |coffeeSystem:u_coffee|                ; 658 (501)           ; 134 (134)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee                                                                                                                       ; coffeeSystem        ; work         ;
-;       |lpm_divide:Div0|                   ; 157 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0                                                                                                       ; lpm_divide          ; work         ;
-;          |lpm_divide_2jm:auto_generated|  ; 157 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0|lpm_divide_2jm:auto_generated                                                                         ; lpm_divide_2jm      ; work         ;
-;             |sign_div_unsign_qlh:divider| ; 157 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0|lpm_divide_2jm:auto_generated|sign_div_unsign_qlh:divider                                             ; sign_div_unsign_qlh ; work         ;
-;                |alt_u_div_87f:divider|    ; 157 (156)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0|lpm_divide_2jm:auto_generated|sign_div_unsign_qlh:divider|alt_u_div_87f:divider                       ; alt_u_div_87f       ; work         ;
+; |lcdIp_Top                                ; 1674 (928)          ; 335 (154)                 ; 0           ; 0            ; 0       ; 0         ; 41   ; 0            ; |lcdIp_Top                                                                                                                                             ; lcdIp_Top           ; work         ;
+;    |coffeeSystem:u_coffee|                ; 668 (510)           ; 134 (134)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee                                                                                                                       ; coffeeSystem        ; work         ;
+;       |lpm_divide:Div0|                   ; 158 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0                                                                                                       ; lpm_divide          ; work         ;
+;          |lpm_divide_2jm:auto_generated|  ; 158 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0|lpm_divide_2jm:auto_generated                                                                         ; lpm_divide_2jm      ; work         ;
+;             |sign_div_unsign_qlh:divider| ; 158 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0|lpm_divide_2jm:auto_generated|sign_div_unsign_qlh:divider                                             ; sign_div_unsign_qlh ; work         ;
+;                |alt_u_div_87f:divider|    ; 158 (157)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0|lpm_divide_2jm:auto_generated|sign_div_unsign_qlh:divider|alt_u_div_87f:divider                       ; alt_u_div_87f       ; work         ;
 ;                   |add_sub_8pc:add_sub_1| ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0|lpm_divide_2jm:auto_generated|sign_div_unsign_qlh:divider|alt_u_div_87f:divider|add_sub_8pc:add_sub_1 ; add_sub_8pc         ; work         ;
 ;    |lcdIp:u_lcd|                          ; 78 (78)             ; 47 (47)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|lcdIp:u_lcd                                                                                                                                 ; lcdIp               ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
@@ -376,7 +375,7 @@ Encoding Type:  One-Hot
 ; lcdIp:u_lcd|t[7]                        ; 3       ;
 ; lcdIp:u_lcd|t[5]                        ; 3       ;
 ; lcdIp:u_lcd|t[4]                        ; 3       ;
-; lcdIp:u_lcd|busy                        ; 45      ;
+; lcdIp:u_lcd|busy                        ; 43      ;
 ; coffeeSystem:u_coffee|total_sec[0]      ; 8       ;
 ; Total number of inverted registers = 12 ;         ;
 +-----------------------------------------+---------+
@@ -387,48 +386,46 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |lcdIp_Top|disp_cnt[26]                             ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |lcdIp_Top|disp_cnt[25]                             ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |lcdIp_Top|enjoy_secs_left[0]                       ;
 ; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |lcdIp_Top|err_code_cur[2]                          ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_tick_cnt[25]   ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_tick_cnt[10]   ;
 ; 8:1                ; 3 bits    ; 15 LEs        ; 3 LEs                ; 12 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_secs_left[3]   ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 2 LEs                ; 8 LEs                  ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|elapsed_sec[6]     ;
-; 8:1                ; 6 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|elapsed_sec[5]     ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|tick_cnt[19]       ;
-; 8:1                ; 3 bits    ; 15 LEs        ; 9 LEs                ; 6 LEs                  ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|phase[0]           ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 2 LEs                ; 8 LEs                  ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|elapsed_sec[7]     ;
+; 8:1                ; 6 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|elapsed_sec[2]     ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|tick_cnt[16]       ;
 ; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_err_latch[2]   ;
-; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |lcdIp_Top|idx[4]                                   ;
-; 9:1                ; 5 bits    ; 30 LEs        ; 10 LEs               ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|brew_progress16[2] ;
+; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |lcdIp_Top|idx[0]                                   ;
+; 9:1                ; 5 bits    ; 30 LEs        ; 10 LEs               ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|brew_progress16[3] ;
 ; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[1]                         ;
+; 10:1               ; 3 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|phase[0]           ;
 ; 10:1               ; 2 bits    ; 12 LEs        ; 10 LEs               ; 2 LEs                  ; Yes        ; |lcdIp_Top|warn_code_cur[2]                         ;
 ; 8:1                ; 6 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[2]                         ;
-; 24:1               ; 2 bits    ; 32 LEs        ; 12 LEs               ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|sec_left[1]        ;
-; 16:1               ; 32 bits   ; 320 LEs       ; 32 LEs               ; 288 LEs                ; Yes        ; |lcdIp_Top|dly[4]                                   ;
-; 6:1                ; 7 bits    ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[14]                        ;
-; 8:1                ; 3 bits    ; 15 LEs        ; 6 LEs                ; 9 LEs                  ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[16]                        ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |lcdIp_Top|Mux123                                   ;
+; 24:1               ; 2 bits    ; 32 LEs        ; 12 LEs               ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|sec_left[2]        ;
+; 16:1               ; 32 bits   ; 320 LEs       ; 32 LEs               ; 288 LEs                ; Yes        ; |lcdIp_Top|dly[13]                                  ;
+; 6:1                ; 7 bits    ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[7]                         ;
+; 8:1                ; 3 bits    ; 15 LEs        ; 6 LEs                ; 9 LEs                  ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[5]                         ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |lcdIp_Top|Mux120                                   ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |lcdIp_Top|ShiftRight1                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |lcdIp_Top|ShiftRight1                              ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|ShiftRight1                              ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|ShiftRight1                              ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |lcdIp_Top|ShiftRight0                              ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|ShiftRight0                              ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector23         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector6          ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector39         ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector7          ;
 ; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector11         ;
 ; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector15         ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector26         ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector30         ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector34         ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector38         ;
 ; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector42         ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|msg_sel[3]                               ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector46         ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector50         ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector54         ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|Selector58         ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|msg_sel[1]                               ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |lcdIp_Top|ShiftRight0                              ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|PAPER_EN           ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|COCOA_EN           ;
 ; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|p                  ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 2 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|GRINDER_1_EN       ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|p                  ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|p                  ;
 ; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|p                  ;
 ; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|p                  ;
 ; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|p                  ;
@@ -439,7 +436,7 @@ Encoding Type:  One-Hot
 ; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|p                  ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |lcdIp_Top|ShiftRight0                              ;
 ; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; No         ; |lcdIp_Top|coffeeSystem:u_coffee|state              ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |lcdIp_Top|lcdIp:u_lcd|Selector25                   ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |lcdIp_Top|lcdIp:u_lcd|Selector22                   ;
 ; 13:1               ; 2 bits    ; 16 LEs        ; 12 LEs               ; 4 LEs                  ; No         ; |lcdIp_Top|first_set16                              ;
 ; 13:1               ; 2 bits    ; 16 LEs        ; 12 LEs               ; 4 LEs                  ; No         ; |lcdIp_Top|first_set16                              ;
 ; 13:1               ; 4 bits    ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; No         ; |lcdIp_Top|state                                    ;
@@ -494,7 +491,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 37                          ;
+; boundary_port         ; 41                          ;
 ; cycloneiii_ff         ; 335                         ;
 ;     CLR               ; 34                          ;
 ;     CLR SCLR          ; 32                          ;
@@ -506,19 +503,19 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA SCLR          ; 39                          ;
 ;     SCLR              ; 58                          ;
 ;     plain             ; 30                          ;
-; cycloneiii_lcell_comb ; 1670                        ;
+; cycloneiii_lcell_comb ; 1678                        ;
 ;     arith             ; 276                         ;
 ;         2 data inputs ; 179                         ;
 ;         3 data inputs ; 97                          ;
-;     normal            ; 1394                        ;
+;     normal            ; 1402                        ;
 ;         0 data inputs ; 14                          ;
 ;         1 data inputs ; 21                          ;
-;         2 data inputs ; 117                         ;
-;         3 data inputs ; 243                         ;
-;         4 data inputs ; 999                         ;
+;         2 data inputs ; 123                         ;
+;         3 data inputs ; 234                         ;
+;         4 data inputs ; 1010                        ;
 ;                       ;                             ;
-; Max LUT depth         ; 41.00                       ;
-; Average LUT depth     ; 13.22                       ;
+; Max LUT depth         ; 42.00                       ;
+; Average LUT depth     ; 13.13                       ;
 +-----------------------+-----------------------------+
 
 
@@ -537,7 +534,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
-    Info: Processing started: Sun Nov 30 23:13:46 2025
+    Info: Processing started: Mon Dec 01 23:28:33 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lcdIP -c lcdIP
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 10 of the 10 processors detected
@@ -552,51 +549,51 @@ Info (12021): Found 1 design units, including 1 entities, in source file src/cof
 Info (12021): Found 1 design units, including 1 entities, in source file src/cmach_recp.sv
     Info (12023): Found entity 1: cmach_recp File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/cmach_recp.sv Line: 3
 Info (12127): Elaborating entity "lcdIp_Top" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(148): object "enjoy_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 148
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(149): object "enjoy_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 149
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(358): object "m1_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 358
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(359): object "m1_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 359
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(360): object "m2_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 360
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(361): object "m2_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 361
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(362): object "m3_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 362
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(363): object "m3_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 363
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(364): object "m4_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 364
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(365): object "m4_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 365
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(366): object "m5_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 366
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(367): object "m5_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 367
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(368): object "m6_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 368
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(369): object "m6_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 369
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(370): object "m7_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 370
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(371): object "m7_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 371
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(372): object "m8_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 372
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(373): object "m8_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 373
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(374): object "m9_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 374
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(375): object "m9_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 375
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(376): object "m10_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 376
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(377): object "m10_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 377
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(378): object "m11_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 378
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(379): object "m11_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 379
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(381): object "m12_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 381
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(382): object "m12_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 382
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(384): object "m13_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 384
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(385): object "m13_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 385
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(387): object "m14_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 387
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(388): object "m14_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 388
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(390): object "m15_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 390
-Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(391): object "m15_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 391
-Info (12128): Elaborating entity "cmach_recp" for hierarchy "cmach_recp:u_recipes" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 67
-Info (12128): Elaborating entity "coffeeSystem" for hierarchy "coffeeSystem:u_coffee" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 121
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(138): object "r_load_filter" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 138
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(139): object "r_pour_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 139
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(139): object "r_hot_water_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 139
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(139): object "r_grinder_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 139
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(139): object "r_cocoa_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 139
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(140): object "_unused_HP" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 140
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(148): object "lv_load_filter" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 148
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(149): object "lv_pour_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 149
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(149): object "lv_hot_water_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 149
-Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(150): object "lv_unused_HP" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 150
-Info (12128): Elaborating entity "lcdIp" for hierarchy "lcdIp:u_lcd" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 143
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(152): object "enjoy_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 152
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(153): object "enjoy_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 153
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(363): object "m1_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 363
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(364): object "m1_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 364
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(365): object "m2_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 365
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(366): object "m2_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 366
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(367): object "m3_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 367
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(368): object "m3_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 368
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(369): object "m4_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 369
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(370): object "m4_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 370
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(371): object "m5_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 371
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(372): object "m5_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 372
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(373): object "m6_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 373
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(374): object "m6_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 374
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(375): object "m7_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 375
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(376): object "m7_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 376
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(377): object "m8_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 377
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(378): object "m8_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 378
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(379): object "m9_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 379
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(380): object "m9_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 380
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(381): object "m10_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 381
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(382): object "m10_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 382
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(383): object "m11_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 383
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(384): object "m11_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 384
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(386): object "m12_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 386
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(387): object "m12_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 387
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(389): object "m13_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 389
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(390): object "m13_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 390
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(392): object "m14_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 392
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(393): object "m14_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 393
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(395): object "m15_l1" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 395
+Warning (10036): Verilog HDL or VHDL warning at lcdIp_Top.sv(396): object "m15_l2" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 396
+Info (12128): Elaborating entity "cmach_recp" for hierarchy "cmach_recp:u_recipes" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 70
+Info (12128): Elaborating entity "coffeeSystem" for hierarchy "coffeeSystem:u_coffee" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 125
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(133): object "r_load_filter" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 133
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(134): object "r_pour_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 134
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(134): object "r_hot_water_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 134
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(134): object "r_grinder_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 134
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(134): object "r_cocoa_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 134
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(135): object "_unused_HP" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 135
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(143): object "lv_load_filter" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 143
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(144): object "lv_pour_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 144
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(144): object "lv_hot_water_time" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 144
+Warning (10036): Verilog HDL or VHDL warning at coffeeSystem.sv(145): object "lv_unused_HP" assigned a value but never read File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 145
+Info (12128): Elaborating entity "lcdIp" for hierarchy "lcdIp:u_lcd" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 147
 Warning (10230): Verilog HDL assignment warning at lcdIp.sv(41): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 41
 Warning (10230): Verilog HDL assignment warning at lcdIp.sv(58): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 58
 Warning (10230): Verilog HDL assignment warning at lcdIp.sv(76): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 76
@@ -608,9 +605,9 @@ Warning (10230): Verilog HDL assignment warning at lcdIp.sv(100): truncated valu
 Warning (10230): Verilog HDL assignment warning at lcdIp.sv(102): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 102
 Warning (10230): Verilog HDL assignment warning at lcdIp.sv(108): truncated value with size 32 to match size of target (20) File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 108
 Info (278001): Inferred 1 megafunctions from design logic
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "coffeeSystem:u_coffee|Div0" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 284
-Info (12130): Elaborated megafunction instantiation "coffeeSystem:u_coffee|lpm_divide:Div0" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 284
-Info (12133): Instantiated megafunction "coffeeSystem:u_coffee|lpm_divide:Div0" with the following parameter: File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 284
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "coffeeSystem:u_coffee|Div0" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 286
+Info (12130): Elaborated megafunction instantiation "coffeeSystem:u_coffee|lpm_divide:Div0" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 286
+Info (12133): Instantiated megafunction "coffeeSystem:u_coffee|lpm_divide:Div0" with the following parameter: File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/coffeeSystem.sv Line: 286
     Info (12134): Parameter "LPM_WIDTHN" = "12"
     Info (12134): Parameter "LPM_WIDTHD" = "8"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -628,30 +625,23 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/add_
 Info (13000): Registers with preset signals will power-up high File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp.sv Line: 52
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LCD_RW" is stuck at GND File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 33
-    Warning (13410): Pin "LCD_ON" is stuck at VCC File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 35
-    Warning (13410): Pin "LCD_BLON" is stuck at VCC File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 37
+    Warning (13410): Pin "LCD_RW" is stuck at GND File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 36
+    Warning (13410): Pin "LCD_ON" is stuck at VCC File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 38
+    Warning (13410): Pin "LCD_BLON" is stuck at VCC File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 40
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 9 registers lost all their fanouts during netlist optimizations.
-Info (144001): Generated suppressed messages file C:/Users/anicolazzo/Documents/GitHub/coffee-maker/output_files/lcdIP.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "BTN_START" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 11
-Info (21057): Implemented 1750 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 16 input pins
+Info (21057): Implemented 1762 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 20 input pins
     Info (21059): Implemented 21 output pins
-    Info (21061): Implemented 1713 logic cells
+    Info (21061): Implemented 1721 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 59 warnings
-    Info: Peak virtual memory: 4841 megabytes
-    Info: Processing ended: Sun Nov 30 23:14:00 2025
-    Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:26
-
-
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in C:/Users/anicolazzo/Documents/GitHub/coffee-maker/output_files/lcdIP.map.smsg.
+    Info: Peak virtual memory: 4842 megabytes
+    Info: Processing ended: Mon Dec 01 23:28:46 2025
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:25
 
 

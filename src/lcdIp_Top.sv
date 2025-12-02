@@ -3,18 +3,21 @@
 
 module lcdIp_Top (
     input  wire        CLOCK_50,
-    input  wire        KEY,            // KEY0 (active-low) -> START (NOT reset anymore)
+    input  wire        KEY,            // KEY0 (active-low) -> START
 
     input  wire        BTN_FLAVOR,      // if these are also KEY buttons, they are active-low
     input  wire        BTN_TYPE,
     input  wire        BTN_SIZE,
     input  wire        BTN_START,       // unused (KEY0 is start), kept for pin-compat
 
+    // 2-bit "level" inputs (same encoding as PAPER_LEVEL):
+    // 00=NOT INSTALLED (or hard empty), 01=EMPTY, 10=ALMOST EMPTY, 11=OK
     input  wire [1:0]  PAPER_LEVEL,
-    input  wire        BIN_0_AMPTY,
-    input  wire        BIN_1_AMPTY,
-    input  wire        ND_AMPTY,
-    input  wire        CH_AMPTY,
+    input  wire [1:0]  BIN0_LEVEL,
+    input  wire [1:0]  BIN1_LEVEL,
+    input  wire [1:0]  ND_LEVEL,
+    input  wire [1:0]  CH_LEVEL,
+
     input  wire [1:0]  W_PRESSURE,
     input  wire        W_TEMP,
     input  wire        STATUS,
@@ -91,10 +94,11 @@ module lcdIp_Top (
         .btn_start (btn_start_lvl),
 
         .PAPER_LEVEL(PAPER_LEVEL),
-        .BIN_0_AMPTY(BIN_0_AMPTY),
-        .BIN_1_AMPTY(BIN_1_AMPTY),
-        .ND_AMPTY(ND_AMPTY),
-        .CH_AMPTY(CH_AMPTY),
+        .BIN0_LEVEL (BIN0_LEVEL),
+        .BIN1_LEVEL (BIN1_LEVEL),
+        .ND_LEVEL   (ND_LEVEL),
+        .CH_LEVEL   (CH_LEVEL),
+
         .W_PRESSURE(W_PRESSURE),
         .W_TEMP(W_TEMP),
         .STATUS(STATUS),
@@ -121,7 +125,7 @@ module lcdIp_Top (
     );
 
     //===========================================================
-    // LCD IP interface (unchanged)
+    // LCD IP interface
     //===========================================================
     reg  [1:0] op;       // 2'b00 = INSTR (RS=0), 2'b01 = DATA (RS=1)
     reg        send;
@@ -220,10 +224,11 @@ module lcdIp_Top (
         if (PAPER_LEVEL == 2'b10) warn_mask[W_FILTER_ALMOST] = 1'b1; // almost empty
         if (W_PRESSURE  == 2'b00) warn_mask[W_LOW_PRESSURE]  = 1'b1; // low pressure
 
-        if (BIN_0_AMPTY) warn_mask[W_BIN0_EMPTY] = 1'b1;
-        if (BIN_1_AMPTY) warn_mask[W_BIN1_EMPTY] = 1'b1;
-        if (ND_AMPTY)    warn_mask[W_ND_EMPTY]   = 1'b1;
-        if (CH_AMPTY)    warn_mask[W_CH_EMPTY]   = 1'b1;
+        // ingredient "almost empty" warnings are ONLY when level==2'b10
+        if (BIN0_LEVEL == 2'b10) warn_mask[W_BIN0_EMPTY] = 1'b1;
+        if (BIN1_LEVEL == 2'b10) warn_mask[W_BIN1_EMPTY] = 1'b1;
+        if (ND_LEVEL   == 2'b10) warn_mask[W_ND_EMPTY]   = 1'b1;
+        if (CH_LEVEL   == 2'b10) warn_mask[W_CH_EMPTY]   = 1'b1;
     end
 
     wire err_present  = |coffee_err_mask;
@@ -459,6 +464,7 @@ module lcdIp_Top (
 
     function automatic [127:0] mk_line2(input logic [1:0] st, input logic [2:0] ph, input logic [4:0] prog16);
         logic [3:0] filled12;
+        logic [7:0] tmp_fill;
         begin
             case (st)
                 2'd0: mk_line2 = {"P","r","e","s","s"," ","S","T","A","R","T"," "," "," "," "," "};
@@ -466,11 +472,9 @@ module lcdIp_Top (
                 2'd2: begin
                     if (prog16 >= 5'd16) filled12 = 4'd12;
                     else begin
-    logic [7:0] tmp_fill;
-    tmp_fill = (prog16 * 8'd12) / 8'd16;
-    filled12 = tmp_fill[3:0];
-end
-
+                        tmp_fill = (prog16 * 8'd12) / 8'd16;
+                        filled12 = tmp_fill[3:0];
+                    end
                     mk_line2 = { bar12(filled12), phase4(ph) };
                 end
                 default: mk_line2 = {"R","E","A","D","Y"," "," "," "," "," "," "," "," "," "," "," "};
@@ -521,7 +525,7 @@ end
     endfunction
 
     //===========================================================
-    // LCD init/write FSM (unchanged)
+    // LCD init/write FSM
     //===========================================================
     localparam [5:0]
         S_PWRUP     = 6'd0,

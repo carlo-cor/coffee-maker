@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lcdIP
-Mon Dec 01 23:28:46 2025
+Mon Dec 01 23:51:56 2025
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
 
 
@@ -52,15 +52,15 @@ refer to the applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Dec 01 23:28:46 2025           ;
+; Analysis & Synthesis Status        ; Successful - Mon Dec 01 23:51:56 2025           ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Standard Edition ;
 ; Revision Name                      ; lcdIP                                           ;
 ; Top-level Entity Name              ; lcdIp_Top                                       ;
 ; Family                             ; Cyclone IV E                                    ;
-; Total logic elements               ; 1,704                                           ;
-;     Total combinational functions  ; 1,674                                           ;
-;     Dedicated logic registers      ; 335                                             ;
-; Total registers                    ; 335                                             ;
+; Total logic elements               ; 1,706                                           ;
+;     Total combinational functions  ; 1,676                                           ;
+;     Dedicated logic registers      ; 336                                             ;
+; Total registers                    ; 336                                             ;
 ; Total pins                         ; 41                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -163,7 +163,7 @@ refer to the applicable agreement for further details.
 ; Number detected on machine ; 20          ;
 ; Maximum allowed            ; 10          ;
 ;                            ;             ;
-; Average used               ; 1.00        ;
+; Average used               ; 1.01        ;
 ; Maximum used               ; 10          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
@@ -175,7 +175,8 @@ refer to the applicable agreement for further details.
 ;     Processor 6            ;   0.0%      ;
 ;     Processor 7            ;   0.0%      ;
 ;     Processor 8            ;   0.0%      ;
-;     Processors 9-10        ;   0.0%      ;
+;     Processor 9            ;   0.0%      ;
+;     Processor 10           ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -206,20 +207,20 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 1,704          ;
+; Estimated Total logic elements              ; 1,706          ;
 ;                                             ;                ;
-; Total combinational functions               ; 1674           ;
+; Total combinational functions               ; 1676           ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 1010           ;
+;     -- 4 input functions                    ; 1011           ;
 ;     -- 3 input functions                    ; 331            ;
-;     -- <=2 input functions                  ; 333            ;
+;     -- <=2 input functions                  ; 334            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 1398           ;
+;     -- normal mode                          ; 1400           ;
 ;     -- arithmetic mode                      ; 276            ;
 ;                                             ;                ;
-; Total registers                             ; 335            ;
-;     -- Dedicated logic registers            ; 335            ;
+; Total registers                             ; 336            ;
+;     -- Dedicated logic registers            ; 336            ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
 ; I/O pins                                    ; 41             ;
@@ -227,8 +228,8 @@ refer to the applicable agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ;                                             ;                ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 335            ;
-; Total fan-out                               ; 6916           ;
+; Maximum fan-out                             ; 336            ;
+; Total fan-out                               ; 6924           ;
 ; Average fan-out                             ; 3.31           ;
 +---------------------------------------------+----------------+
 
@@ -238,7 +239,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                    ; Entity Name         ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |lcdIp_Top                                ; 1674 (928)          ; 335 (154)                 ; 0           ; 0            ; 0       ; 0         ; 41   ; 0            ; |lcdIp_Top                                                                                                                                             ; lcdIp_Top           ; work         ;
+; |lcdIp_Top                                ; 1676 (930)          ; 336 (155)                 ; 0           ; 0            ; 0       ; 0         ; 41   ; 0            ; |lcdIp_Top                                                                                                                                             ; lcdIp_Top           ; work         ;
 ;    |coffeeSystem:u_coffee|                ; 668 (510)           ; 134 (134)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee                                                                                                                       ; coffeeSystem        ; work         ;
 ;       |lpm_divide:Div0|                   ; 158 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0                                                                                                       ; lpm_divide          ; work         ;
 ;          |lpm_divide_2jm:auto_generated|  ; 158 (0)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lcdIp_Top|coffeeSystem:u_coffee|lpm_divide:Div0|lpm_divide_2jm:auto_generated                                                                         ; lpm_divide_2jm      ; work         ;
@@ -350,7 +351,7 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 335   ;
+; Total registers                              ; 336   ;
 ; Number of registers using Synchronous Clear  ; 163   ;
 ; Number of registers using Synchronous Load   ; 8     ;
 ; Number of registers using Asynchronous Clear ; 181   ;
@@ -386,20 +387,20 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |lcdIp_Top|disp_cnt[25]                             ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |lcdIp_Top|disp_cnt[24]                             ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |lcdIp_Top|enjoy_secs_left[0]                       ;
 ; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |lcdIp_Top|err_code_cur[2]                          ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_tick_cnt[10]   ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_tick_cnt[26]   ;
 ; 8:1                ; 3 bits    ; 15 LEs        ; 3 LEs                ; 12 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_secs_left[3]   ;
 ; 8:1                ; 2 bits    ; 10 LEs        ; 2 LEs                ; 8 LEs                  ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|elapsed_sec[7]     ;
 ; 8:1                ; 6 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|elapsed_sec[2]     ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|tick_cnt[16]       ;
-; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_err_latch[2]   ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|tick_cnt[15]       ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|ing_err_latch[5]   ;
 ; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |lcdIp_Top|idx[0]                                   ;
 ; 9:1                ; 5 bits    ; 30 LEs        ; 10 LEs               ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|brew_progress16[3] ;
 ; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[1]                         ;
 ; 10:1               ; 3 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|phase[0]           ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 10 LEs               ; 2 LEs                  ; Yes        ; |lcdIp_Top|warn_code_cur[2]                         ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 10 LEs               ; 2 LEs                  ; Yes        ; |lcdIp_Top|warn_code_cur[0]                         ;
 ; 8:1                ; 6 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |lcdIp_Top|lcdIp:u_lcd|t[2]                         ;
 ; 24:1               ; 2 bits    ; 32 LEs        ; 12 LEs               ; 20 LEs                 ; Yes        ; |lcdIp_Top|coffeeSystem:u_coffee|sec_left[2]        ;
 ; 16:1               ; 32 bits   ; 320 LEs       ; 32 LEs               ; 288 LEs                ; Yes        ; |lcdIp_Top|dly[13]                                  ;
@@ -492,7 +493,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 41                          ;
-; cycloneiii_ff         ; 335                         ;
+; cycloneiii_ff         ; 336                         ;
 ;     CLR               ; 34                          ;
 ;     CLR SCLR          ; 32                          ;
 ;     CLR SCLR SLD      ; 2                           ;
@@ -502,20 +503,20 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA CLR SCLR      ; 32                          ;
 ;     ENA SCLR          ; 39                          ;
 ;     SCLR              ; 58                          ;
-;     plain             ; 30                          ;
-; cycloneiii_lcell_comb ; 1678                        ;
+;     plain             ; 31                          ;
+; cycloneiii_lcell_comb ; 1680                        ;
 ;     arith             ; 276                         ;
 ;         2 data inputs ; 179                         ;
 ;         3 data inputs ; 97                          ;
-;     normal            ; 1402                        ;
+;     normal            ; 1404                        ;
 ;         0 data inputs ; 14                          ;
 ;         1 data inputs ; 21                          ;
-;         2 data inputs ; 123                         ;
+;         2 data inputs ; 124                         ;
 ;         3 data inputs ; 234                         ;
-;         4 data inputs ; 1010                        ;
+;         4 data inputs ; 1011                        ;
 ;                       ;                             ;
 ; Max LUT depth         ; 42.00                       ;
-; Average LUT depth     ; 13.13                       ;
+; Average LUT depth     ; 13.11                       ;
 +-----------------------+-----------------------------+
 
 
@@ -534,7 +535,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
-    Info: Processing started: Mon Dec 01 23:28:33 2025
+    Info: Processing started: Mon Dec 01 23:51:43 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lcdIP -c lcdIP
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 10 of the 10 processors detected
@@ -634,13 +635,13 @@ Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "BTN_START" File: C:/Users/anicolazzo/Documents/GitHub/coffee-maker/src/lcdIp_Top.sv Line: 11
-Info (21057): Implemented 1762 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1764 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 20 input pins
     Info (21059): Implemented 21 output pins
-    Info (21061): Implemented 1721 logic cells
+    Info (21061): Implemented 1723 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 59 warnings
-    Info: Peak virtual memory: 4842 megabytes
-    Info: Processing ended: Mon Dec 01 23:28:46 2025
+    Info: Peak virtual memory: 4872 megabytes
+    Info: Processing ended: Mon Dec 01 23:51:56 2025
     Info: Elapsed time: 00:00:13
     Info: Total CPU time (on all processors): 00:00:25
 

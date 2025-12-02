@@ -563,6 +563,9 @@ module lcdIp_Top (
     reg [2:0] prev_brew_phase;
     reg [4:0] prev_brew_prog;
 
+    reg       prev_enjoy_active;
+    wire      enjoy_changed = (enjoy_active != prev_enjoy_active);
+
     wire msg_changed = (msg_sel != prev_msg_sel);
 
     wire normal_changed = (msg_sel == 4'd0) &&
@@ -584,9 +587,10 @@ module lcdIp_Top (
             prev_sys_state  <= 2'd0;
             prev_brew_phase <= 3'd0;
             prev_brew_prog  <= 5'd0;
+            prev_enjoy_active <= 1'b0;
             change_detected <= 1'b0;
         end else begin
-            if (msg_changed || normal_changed)
+            if (msg_changed || normal_changed || enjoy_changed)
                 change_detected <= 1'b1;
             else if (state == S_CLR_SW)
                 change_detected <= 1'b0;
@@ -598,6 +602,7 @@ module lcdIp_Top (
             prev_sys_state  <= sys_state;
             prev_brew_phase <= brew_phase;
             prev_brew_prog  <= brew_progress16;
+            prev_enjoy_active <= enjoy_active;
         end
     end
 
